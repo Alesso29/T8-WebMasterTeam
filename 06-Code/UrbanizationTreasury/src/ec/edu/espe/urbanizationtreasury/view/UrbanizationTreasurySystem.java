@@ -48,6 +48,12 @@ public class UrbanizationTreasurySystem {
                 System.out.print("Enter an option: ");
                 option = sc.nextInt();
                 
+                while(option<1 || option> 6){
+
+                System.out.print("Error enter the option again: 9");
+                option = sc.nextInt();
+                }
+                
                 switch (option){
                     case 1 -> {
                         enterResident(residents[residentNumber], sc); //Enter Residents
@@ -84,6 +90,7 @@ public class UrbanizationTreasurySystem {
         
         System.out.print("Recident Id:");
         residents.setDni(sc.nextLong());
+        digitVerification(residents.setDni, sc);
         
         System.out.print("Enter recident name: ");
         residents.setName(sc.next());
@@ -92,4 +99,14 @@ public class UrbanizationTreasurySystem {
         residents.setBatchNumber(sc.nextInt());
         
     }
+    
+    private static void digitVerification(long residentsId, Scanner sc){
+        
+        while(residentsId<100000000 || residentsId> 2000000000 ){
+
+       System.out.println("Error enter the ID again:");
+        residentsId = sc.nextLong();
+    }
+  }
+    
 }

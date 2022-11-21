@@ -13,6 +13,7 @@ public class Resident {
     private long dni;
     private String name;
     private int batchNumber;
+    public long setDni;
 
     public long getDni() {
         return dni;
