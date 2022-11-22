@@ -47,12 +47,8 @@ public class UrbanizationTreasurySystem {
             try{
                 System.out.print("Enter an option: ");
                 option = sc.nextInt();
+                optionVerifier(option);
                 
-                while(option<1 || option> 6){
-
-                System.out.print("Error enter the option again: 9");
-                option = sc.nextInt();
-                }
                 
                 switch (option){
                     case 1 -> {
@@ -108,5 +104,15 @@ public class UrbanizationTreasurySystem {
         residentsId = sc.nextLong();
     }
   }
+    
+     private static int optionVerifier(int option){
+    
+        while(option<1||option>6){
+            Scanner sc = new Scanner(System.in);
+            System.out.print("Error enter the option again:");
+            option = sc.nextInt();
+        }
+        return(option);
+    }    
     
 }
