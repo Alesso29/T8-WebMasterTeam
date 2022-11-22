@@ -6,7 +6,7 @@ package ec.edu.espe.urbanizationtreasury.model;
 
 /**
  *
- * @author Augusto Salazar, WebMasterTeam, DCCO-ESPE
+ * @author WebMasterTeam, DCCO-ESPE
  */
 public class Payment {
     
