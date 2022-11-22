@@ -13,6 +13,12 @@ public class Resident {
     private long dni;
     private String name;
     private int batchNumber;
+    public long setDni;
+
+    @Override
+    public String toString() {
+        return "Resident{" + "dni=" + dni + ", name=" + name + ", batchNumber=" + batchNumber + ", setDni=" + setDni + '}';
+    }
 
     public long getDni() {
         return dni;
