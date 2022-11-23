@@ -36,35 +36,13 @@ public class UrbanizationTreasurySystem {
             residents[i] = new Resident();
         }
 
-        Scanner sc = new Scanner(System.in);
+        
 
-        System.out.println(" ---- National Polytechnic School Urbanization ---- ");
-        System.out.println("              ---- Treasury System ---- ");
+            Scanner sc = new Scanner(System.in);
 
-        do {
-            System.out.println("================================");
-            System.out.println("#####Residents and Payments#####");
-            System.out.println("1. Enter Resident");
-            System.out.println("2. Exit");
-            System.out.println("=================================");
-            System.out.print("Enter an option: ");
-            option = sc.nextInt();
-            optionVerifier(option);
-            switch (option) {
-                case 1 -> {
-                    enterResident(residents[residentNumber], sc); //Enter Residents
-                    residentNumber++;
-                }
+            System.out.println(" ---- National Polytechnic School Urbanization ---- ");
+            System.out.println("              ---- Treasury System ---- ");
 
-                case 2 ->{
-                    System.out.println("=================================");
-                    System.out.println("== Thanks for using the system ==");
-                    System.out.println("=================================");
-                }
-                
-            }
-        } while (option != 1 && option != 2);
-        if (option == 1) {
             while (!exit) {
 
                 System.out.println("================================");
@@ -87,20 +65,54 @@ public class UrbanizationTreasurySystem {
                             residentNumber++;
                         }
                         case 2 -> {
-                            //Enter the payments resident to resident
-                            // maybe use an options menu and into put the option like
-                            //pay, history, print recive, and obviously exit.
+                            
+                            if (residentNumber != 0) {
+                                System.out.println("----------------------------------------");
+
+                                
+
+                                System.out.println("----------------------------------------");
+                            }else{
+                                System.out.println("|||No residents registered|||");
+                            }
                         }
                         case 3 -> {
-                            System.out.println("----------------------------------------");
-                            accesCardPayment(residents, accesCard, payments);
-                            System.out.println("----------------------------------------");
+                            if (residentNumber != 0) {
+                                System.out.println("----------------------------------------");
+
+                                accesCardPayment(residents, accesCard, payments);
+
+                                System.out.println("----------------------------------------");
+                            }else{
+                                System.out.println("|||No residents registered|||");
+                            }
+                            
 
                         }
                         case 4 -> {
+                            
+                            if (residentNumber != 0) {
+                                System.out.println("----------------------------------------");
+
+                                
+
+                                System.out.println("----------------------------------------");
+                            }else{
+                                System.out.println("|||No residents registered|||");
+                            }
 
                         }
                         case 5 -> {
+                            
+                            if (residentNumber != 0) {
+                                System.out.println("----------------------------------------");
+
+                              
+
+                                System.out.println("----------------------------------------");
+                            }else{
+                                System.out.println("|||No residents registered|||");
+                            }
 
                         }
                         case 6 -> {
@@ -119,8 +131,7 @@ public class UrbanizationTreasurySystem {
 
             }
         }
-
-    }
+    
 
     private static void accesCardPayment(Resident[] residents, float[] accesCard, Payment[] payments) {
         Scanner sc = new Scanner(System.in);
@@ -170,7 +181,7 @@ public class UrbanizationTreasurySystem {
 
         System.out.print("Enter batch number: ");
         residents.setBatchNumber(sc.nextInt());
-        
+
         System.out.println("|||User entered |||");
 
     }
