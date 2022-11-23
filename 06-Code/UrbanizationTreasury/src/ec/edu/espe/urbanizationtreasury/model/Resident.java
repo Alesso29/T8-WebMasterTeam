@@ -20,6 +20,7 @@ public class Resident {
         return "Resident{" + "dni=" + dni + ", name=" + name + ", batchNumber=" + batchNumber + ", setDni=" + setDni + '}';
     }
 
+
     public long getDni() {
         return dni;
     }
