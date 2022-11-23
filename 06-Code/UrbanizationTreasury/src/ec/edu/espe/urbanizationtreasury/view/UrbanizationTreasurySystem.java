@@ -42,15 +42,15 @@ public class UrbanizationTreasurySystem {
         System.out.println("              ---- Treasury System ---- ");
         
         while (!exit){
-            
-            System.out.println("Residents and Payments");
+            System.out.println("================================");
+            System.out.println("#####Residents and Payments#####");
             System.out.println("1. Enter Residents");
             System.out.println("2. Aliquot");
             System.out.println("3. Access Card");
             System.out.println("4. Access Control");
             System.out.println("5. Extraordinary");
             System.out.println("6. Exit");
-            
+            System.out.println("=================================");
             try{
                 System.out.print("Enter an option: ");
                 option = sc.nextInt();
@@ -97,7 +97,7 @@ public class UrbanizationTreasurySystem {
         boolean accesCardVerification , monthVerification;
         long id;
         String month;
-        String [] months = {"January","February","March","April","May","June","July","August","September","October","November","December"};
+        String [] months = {"january","february","march","april","may","june","july","august","september","october","november","december"};
         
         do{
             accesCardVerification = true;
@@ -118,7 +118,7 @@ public class UrbanizationTreasurySystem {
                         }
                         payments[i].setAccessCard(accesCard);
                         if(monthVerification == true){
-                            System.out.println("Please enter a month (Example: January)");
+                            System.out.println("Please enter a month (Example: january)");
                         }
                     }while(monthVerification);
                 }
@@ -191,14 +191,14 @@ public class UrbanizationTreasurySystem {
     }
   }
     
-     private static int optionVerifier(int option){
+     private static void optionVerifier(int option){
     
-        while(option<1||option>6){
-            Scanner sc = new Scanner(System.in);
-            System.out.print("Error enter the option again:");
-            option = sc.nextInt();
+        if(option<1||option>6){
+            System.out.println("||||||||||||||||||||||||||||||||");
+            System.out.println("||Error enter the option again||");
+            System.out.println("||||||||||||||||||||||||||||||||");
         }
-        return(option);
+        
     }    
     
 }
