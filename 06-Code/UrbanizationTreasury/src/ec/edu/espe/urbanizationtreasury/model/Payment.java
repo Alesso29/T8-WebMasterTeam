@@ -6,14 +6,22 @@ package ec.edu.espe.urbanizationtreasury.model;
 
 /**
  *
- * @author Augusto Salazar, WebMasterTeam, DCCO-ESPE
+ * @author WebMasterTeam, DCCO-ESPE
  */
 public class Payment {
     
     private float aliquot;
-    private float accessCard;
+    private float [] accessCard = new float [12];
     private float accessControl;
     private float extraordinary;
+    
+    public Payment() {
+        aliquot = 0;
+        float [] array = {0,0,0,0,0,0,0,0,0,0,0,0};
+        accessCard = array;
+        accessControl = 0;
+        extraordinary = 0;
+    }
 
     public float getAliquot() {
         return aliquot;
@@ -23,11 +31,11 @@ public class Payment {
         this.aliquot = aliquot;
     }
 
-    public float getAccessCard() {
+    public float[] getAccessCard() {
         return accessCard;
     }
 
-    public void setAccessCard(float accessCard) {
+    public void setAccessCard(float[] accessCard) {
         this.accessCard = accessCard;
     }
 

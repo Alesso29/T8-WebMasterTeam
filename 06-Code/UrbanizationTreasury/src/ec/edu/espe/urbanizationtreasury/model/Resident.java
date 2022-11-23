@@ -6,7 +6,7 @@ package ec.edu.espe.urbanizationtreasury.model;
 
 /**
  *
- * @author Augusto Salazar, WebMasterTeam, DCCO-ESPE
+ * @author WebMasterTeam, DCCO-ESPE
  */
 public class Resident {
     
@@ -14,6 +14,11 @@ public class Resident {
     private String name;
     private int batchNumber;
     public long setDni;
+
+    @Override
+    public String toString() {
+        return "Resident{" + "dni=" + dni + ", name=" + name + ", batchNumber=" + batchNumber + ", setDni=" + setDni + '}';
+    }
 
     public long getDni() {
         return dni;
