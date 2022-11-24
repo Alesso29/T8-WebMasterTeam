@@ -58,14 +58,102 @@ public class UrbanizationTreasurySystem {
                         }
                     }
                     case 3 -> {
-                        /*if (residentNumber != 0) {
+                            if (residentNumber[0] != 0) {
                             System.out.println("----------------------------------------");
+                            int returnMenu = 2;
+                            do {
+                                System.out.println("1. Pay");
+                                System.out.println("2. History");
+                                System.out.println("3. Print bill");
+                                System.out.println("4. Exit");
+                                try {
 
-                            accesCardPayment(residents, accesCard, payments);
+                                    System.out.print("Enter an option: ");
+                                    option = sc.nextInt();
 
+                                    switch (option) {
+                                        case 1 -> {
+                                            int searchId;
+                                            int searchIdFound = 0;
+                                            if (residentNumber[0] != 0) {
+                                                System.out.println("Enter resident id: ");
+                                                searchId = sc.nextInt();
 
+                                                for (int i = 0; i < residents.size(); i++) {
+                                                    if (residents.get(i).getDni() == searchId) {
+                                                        System.out.println("=========== Resident " + searchId + " ===========");
+                                                        enterAccessCard(residents.get(i));
+                                                        searchIdFound++;
+                                                    }
+                                                }
+                                                if (searchIdFound == 0) {
+                                                    System.out.println("Resident DNI not found");
+                                                }
+                                            } else {
+                                                System.out.println("Resident no registrated");
+                                            }
+                                        }
+                                        case 2 -> {
+                                            int searchId;
+                                            int searchIdFound = 0;
+                                            if (residentNumber[0] != 0) {
+                                                System.out.println("Enter resident DNI for most the history: ");
+                                                searchId = sc.nextInt();
 
-                    }
+                                                for (int i = 0; i < residents.size(); i++) {
+                                                    if (residents.get(i).getDni() == searchId) {
+                                                        System.out.println("=========== Resident " + searchId + " ===========");
+                                                        printHistory(residents.get(i), residents.get(i).getAccessCard());
+                                                        searchIdFound++;
+                                                    }
+                                                }
+                                                if (searchIdFound == 0) {
+                                                    System.out.println("Resident DNI not found");
+                                                }
+                                            } else {
+                                                System.out.println("Resident no registrated");
+                                            }
+                                        }
+                                        case 3 -> {
+                                            int searchId;
+                                            int searchIdFound = 0;
+                                            if (residentNumber[0] != 0) {
+                                                System.out.println("Enter resident DNI for print bill: ");
+                                                searchId = sc.nextInt();
+
+                                                for (int i = 0; i < residents.size(); i++) {
+                                                    if (residents.get(i).getDni() == searchId) {
+                                                        System.out.println("=========== Resident " + searchId + " ===========");
+                                                        printBill(residents.get(i), residents.get(i).getAccessCard());
+                                                        searchIdFound++;
+                                                    }
+                                                }
+                                                if (searchIdFound == 0) {
+                                                    System.out.println("Resident DNI not found");
+                                                }
+                                            } else {
+                                                System.out.println("Resident no registrated");
+                                            }
+                                        }
+                                        case 4 -> {
+                                            System.out.println("Do you want go out? Yes(1) No(0)");
+                                            returnMenu = sc.nextInt();
+
+                                        }
+                                        default ->
+                                            System.out.println("Option invalid ");
+                                    }
+
+                                } catch (InputMismatchException e) {
+                                    System.out.println("Opcion invalid");
+                                    sc.next();
+                                }
+                            } while (returnMenu != 1);
+                            System.out.println("----------------------------------------");
+                        } else {
+                            System.out.println("|||No residents registered|||");
+                        }
+                        }
                     case 4 -> {
 
                         /*if (residentNumber != 0) {
@@ -196,6 +284,16 @@ public class UrbanizationTreasurySystem {
         residents.setMounths(sc.next());
         System.out.println("Enter the payment: ");
         residents.setAliquot(sc.nextFloat());
+
+    }
+    
+    private static void enterAccessCard(Resident residents) {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the Mounth: ");
+        residents.setMounths(sc.next());
+        System.out.println("Enter the payment: ");
+        residents.setAccessCard(sc.nextFloat());
 
     }
     
