@@ -2,6 +2,7 @@ package ec.edu.espe.urbanizationtreasury.view;
 
 import ec.edu.espe.urbanizationtreasury.model.Payment;
 import ec.edu.espe.urbanizationtreasury.model.Resident;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -28,13 +29,10 @@ public class UrbanizationTreasurySystem {
             payments[i] = new Payment();
         }
 
-        Resident residents[];
-        residents = new Resident[100];
+        ArrayList<Resident> residents = new ArrayList<>();
 
         //Initializing the array
-        for (int i = 0; i < 100; i++) {
-            residents[i] = new Resident();
-        }
+        
 
         
 
@@ -57,11 +55,11 @@ public class UrbanizationTreasurySystem {
                 try {
                     System.out.print("Enter an option: ");
                     option = sc.nextInt();
-                    optionVerifier(option);
+                    //optionVerifier(option);
 
                     switch (option) {
                         case 1 -> {
-                            enterResident(residents[residentNumber], sc); //Enter Residents
+                            enterResident(residents, sc); //Enter Residents
                             residentNumber++;
                         }
                         case 2 -> {
@@ -120,7 +118,8 @@ public class UrbanizationTreasurySystem {
                             System.out.println("== Thanks for using the system ==");
                             System.out.println("=================================");
                             exit = true;
-                        }
+                        } default -> 
+                            System.out.println("Option invalid");
 
                     }
 
@@ -133,7 +132,7 @@ public class UrbanizationTreasurySystem {
         }
     
 
-    private static void accesCardPayment(Resident[] residents, float[] accesCard, Payment[] payments) {
+    private static void accesCardPayment(ArrayList<Resident> residents, float[] accesCard, Payment[] payments) {
         Scanner sc = new Scanner(System.in);
         boolean accesCardVerification, monthVerification;
         long id;
@@ -144,9 +143,9 @@ public class UrbanizationTreasurySystem {
             accesCardVerification = true;
             monthVerification = true;
             id = readOfLong("Enter the id of resident: ", "Please enter a number");
-            digitVerification(id, sc);
+            //digitVerification(id, sc);
             for (int i = 0; i < 100; i++) {
-                if (id == residents[i].getDni()) {
+                if (id == residents.get(i).getDni()) {
                     do {
                         accesCardVerification = false;
                         System.out.print("Please enter the month whose payment will be modified: ");
@@ -170,17 +169,18 @@ public class UrbanizationTreasurySystem {
         } while (accesCardVerification);
     }
 
-    private static void enterResident(Resident residents, Scanner sc) {
+    private static void enterResident(ArrayList<Resident> residents, Scanner sc) {
 
+        Resident resident = new Resident();
         System.out.print("Recident Id:");
-        residents.setDni(sc.nextLong());
-        digitVerification(residents.setDni, sc);
+        resident.setDni(sc.nextLong());
+        //digitVerification(resident.setDni, sc);
 
         System.out.print("Enter recident name: ");
-        residents.setName(sc.next());
+        resident.setName(sc.next());
 
         System.out.print("Enter batch number: ");
-        residents.setBatchNumber(sc.nextInt());
+        resident.setBatchNumber(sc.nextInt());
 
         System.out.println("|||User entered |||");
 
@@ -225,15 +225,15 @@ public class UrbanizationTreasurySystem {
         return auxiliar;
     }
 
-    private static void digitVerification(long residentsId, Scanner sc) {
-
+   /* private static void digitVerification(long residentsId, Scanner sc) {
+//borrar esto >:D
         while (residentsId < 100000000 || residentsId > 2000000000) {
 
             System.out.println("Error enter the ID again:");
             residentsId = sc.nextLong();
         }
     }
-
+//Borrar esto 
     private static void optionVerifier(int option) {
 
         if (option < 1 || option > 6) {
@@ -242,6 +242,6 @@ public class UrbanizationTreasurySystem {
             System.out.println("||||||||||||||||||||||||||||||||");
         }
 
-    }
+    }*/
 
 }
