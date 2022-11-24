@@ -25,9 +25,10 @@ public class UrbanizationTreasurySystem {
         ArrayList<Resident> residents = new ArrayList();
 
         Scanner sc = new Scanner(System.in);
-
+        System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||");
         System.out.println(" ---- National Polytechnic School Urbanization ---- ");
         System.out.println("              ---- Treasury System ---- ");
+        System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||");
 
         while (!exit) {
 
@@ -67,6 +68,7 @@ public class UrbanizationTreasurySystem {
 
                                     switch (option) {
                                         case 1 -> {
+                                            System.out.println("----------------------------------------");
                                             int searchId;
                                             int searchIdFound = 0;
                                             if (residentNumber[0] != 0) {
@@ -86,8 +88,10 @@ public class UrbanizationTreasurySystem {
                                             } else {
                                                 System.out.println("Resident no registrated");
                                             }
+                                            System.out.println("----------------------------------------");
                                         }
                                         case 2 -> {
+                                            System.out.println("----------------------------------------");
                                             int searchId;
                                             int searchIdFound = 0;
                                             if (residentNumber[0] != 0) {
@@ -107,8 +111,10 @@ public class UrbanizationTreasurySystem {
                                             } else {
                                                 System.out.println("Resident no registrated");
                                             }
+                                            System.out.println("----------------------------------------");
                                         }
                                         case 3 -> {
+                                            System.out.println("----------------------------------------");
                                             int searchId;
                                             int searchIdFound = 0;
                                             if (residentNumber[0] != 0) {
@@ -128,8 +134,10 @@ public class UrbanizationTreasurySystem {
                                             } else {
                                                 System.out.println("Resident no registrated");
                                             }
+                                            System.out.println("----------------------------------------");
                                         }
                                         case 4 -> {
+                                            System.out.println("----------------------------------------");
                                             System.out.println("Do you want go out? Yes(1) No(0)");
                                             returnMenu = sc.nextInt();
 
@@ -147,6 +155,7 @@ public class UrbanizationTreasurySystem {
                         } else {
                             System.out.println("|||No residents registered|||");
                         }
+                        System.out.println("----------------------------------------");
 
                     }
 
@@ -445,6 +454,7 @@ public class UrbanizationTreasurySystem {
                         }
                     }
                     case 6 -> {
+                        System.out.println("----------------------------------------");
                         int saveChickenId;
                         int saveIdFound = 0;
                         if (residentNumber[0] != 0) 
@@ -468,6 +478,7 @@ public class UrbanizationTreasurySystem {
                         } else {
                             System.out.println("Resident no registrated");
                         }
+                        System.out.println("----------------------------------------");
                     }
                     case 7 -> {
                         System.out.println("=================================");
@@ -547,40 +558,47 @@ public class UrbanizationTreasurySystem {
     private static void enterAliquots(Resident residents) {
 
         Scanner sc = new Scanner(System.in);
+        System.out.println("|||||||||||||||||||");
         System.out.println("Enter the Mounth: ");
         residents.setMounths(sc.next());
         System.out.println("Enter the payment: ");
         residents.setAliquot(sc.nextFloat());
+        System.out.println("|||||||||||||||||||");
 
     }
 
     private static void enterAccessCard(Resident residents) {
 
         Scanner sc = new Scanner(System.in);
+        System.out.println("|||||||||||||||||||");
         System.out.println("Enter the Mounth: ");
         residents.setMounths(sc.next());
         System.out.println("Enter the payment: ");
         residents.setAccessCard(sc.nextFloat());
+        System.out.println("|||||||||||||||||||");
 
     }
 
     private static void enterAccessControl(Resident residents) {
 
         Scanner sc = new Scanner(System.in);
+        System.out.println("|||||||||||||||||||");
         System.out.println("Enter the Mounth: ");
         residents.setMounths(sc.next());
         System.out.println("Enter the payment: ");
         residents.setAccessControl(sc.nextFloat());
+        System.out.println("|||||||||||||||||||");
 
     }
     
     private static void enterExtraordinary(Resident residents) {
-
+        System.out.println("|||||||||||||||||||");
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the Mounth: ");
         residents.setMounths(sc.next());
         System.out.println("Enter the paymentt: ");
         residents.setExtraordinary(sc.nextFloat());
+        System.out.println("|||||||||||||||||||");
 
     }
 
