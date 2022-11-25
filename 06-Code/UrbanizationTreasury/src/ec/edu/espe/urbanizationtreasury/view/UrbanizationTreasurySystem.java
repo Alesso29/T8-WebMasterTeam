@@ -21,6 +21,9 @@ public class UrbanizationTreasurySystem {
         int option; //For options menu
         boolean exit = false; //Exit menu
         int[] residentNumber = new int[1]; //position in the array
+        int numberToEnter = 0;
+        String[] mounths = new String[4];
+        int contadorMounths = 0;
 
         ArrayList<Resident> residents = new ArrayList();
 
@@ -69,6 +72,7 @@ public class UrbanizationTreasurySystem {
                                         case 1 -> {
                                             int searchId;
                                             int searchIdFound = 0;
+                                            numberToEnter = 1;
                                             if (residentNumber[0] != 0) {
                                                 System.out.println("Enter resident id: ");
                                                 searchId = sc.nextInt();
@@ -76,7 +80,8 @@ public class UrbanizationTreasurySystem {
                                                 for (int i = 0; i < residents.size(); i++) {
                                                     if (residents.get(i).getDni() == searchId) {
                                                         System.out.println("=========== Resident " + searchId + " ===========");
-                                                        enterAliquots(residents.get(i));
+                                                        enterPayments(residents.get(i), numberToEnter, mounths, contadorMounths);
+                                                        contadorMounths++;
                                                         searchIdFound++;
                                                     }
                                                 }
@@ -90,6 +95,7 @@ public class UrbanizationTreasurySystem {
                                         case 2 -> {
                                             int searchId;
                                             int searchIdFound = 0;
+                                            numberToEnter = 1;
                                             if (residentNumber[0] != 0) {
                                                 System.out.println("Enter resident DNI for most the history: ");
                                                 searchId = sc.nextInt();
@@ -97,7 +103,7 @@ public class UrbanizationTreasurySystem {
                                                 for (int i = 0; i < residents.size(); i++) {
                                                     if (residents.get(i).getDni() == searchId) {
                                                         System.out.println("=========== Resident " + searchId + " ===========");
-                                                        printHistory(residents.get(i), residents.get(i).getAliquot());
+                                                        printHistory(residents.get(i), residents.get(i).getAliquot(), mounths, numberToEnter);
                                                         searchIdFound++;
                                                     }
                                                 }
@@ -111,6 +117,7 @@ public class UrbanizationTreasurySystem {
                                         case 3 -> {
                                             int searchId;
                                             int searchIdFound = 0;
+                                            numberToEnter = 1;
                                             if (residentNumber[0] != 0) {
                                                 System.out.println("Enter resident DNI for print bill: ");
                                                 searchId = sc.nextInt();
@@ -118,7 +125,7 @@ public class UrbanizationTreasurySystem {
                                                 for (int i = 0; i < residents.size(); i++) {
                                                     if (residents.get(i).getDni() == searchId) {
                                                         System.out.println("=========== Resident " + searchId + " ===========");
-                                                        printBill(residents.get(i), residents.get(i).getAliquot());
+                                                        printBill(residents.get(i), residents.get(i).getAliquot(), mounths, numberToEnter);
                                                         searchIdFound++;
                                                     }
                                                 }
@@ -168,6 +175,7 @@ public class UrbanizationTreasurySystem {
                                         case 1 -> {
                                             int searchId;
                                             int searchIdFound = 0;
+                                            numberToEnter = 2;
                                             if (residentNumber[0] != 0) {
                                                 System.out.println("Enter resident id: ");
                                                 searchId = sc.nextInt();
@@ -175,7 +183,8 @@ public class UrbanizationTreasurySystem {
                                                 for (int i = 0; i < residents.size(); i++) {
                                                     if (residents.get(i).getDni() == searchId) {
                                                         System.out.println("=========== Resident " + searchId + " ===========");
-                                                        enterAccessCard(residents.get(i));
+                                                        enterPayments(residents.get(i), numberToEnter, mounths, contadorMounths);
+                                                        contadorMounths++;
                                                         searchIdFound++;
                                                     }
                                                 }
@@ -189,6 +198,7 @@ public class UrbanizationTreasurySystem {
                                         case 2 -> {
                                             int searchId;
                                             int searchIdFound = 0;
+                                            numberToEnter = 2;
                                             if (residentNumber[0] != 0) {
                                                 System.out.println("Enter resident DNI for most the history: ");
                                                 searchId = sc.nextInt();
@@ -196,7 +206,7 @@ public class UrbanizationTreasurySystem {
                                                 for (int i = 0; i < residents.size(); i++) {
                                                     if (residents.get(i).getDni() == searchId) {
                                                         System.out.println("=========== Resident " + searchId + " ===========");
-                                                        printHistory(residents.get(i), residents.get(i).getAccessCard());
+                                                        printHistory(residents.get(i), residents.get(i).getAccessCard(), mounths, numberToEnter);
                                                         searchIdFound++;
                                                     }
                                                 }
@@ -210,6 +220,7 @@ public class UrbanizationTreasurySystem {
                                         case 3 -> {
                                             int searchId;
                                             int searchIdFound = 0;
+                                            numberToEnter = 2;
                                             if (residentNumber[0] != 0) {
                                                 System.out.println("Enter resident DNI for print bill: ");
                                                 searchId = sc.nextInt();
@@ -217,7 +228,7 @@ public class UrbanizationTreasurySystem {
                                                 for (int i = 0; i < residents.size(); i++) {
                                                     if (residents.get(i).getDni() == searchId) {
                                                         System.out.println("=========== Resident " + searchId + " ===========");
-                                                        printBill(residents.get(i), residents.get(i).getAccessCard());
+                                                        printBill(residents.get(i), residents.get(i).getAccessCard(), mounths, numberToEnter);
                                                         searchIdFound++;
                                                     }
                                                 }
@@ -266,6 +277,7 @@ public class UrbanizationTreasurySystem {
                                         case 1 -> {
                                             int searchId;
                                             int searchIdFound = 0;
+                                            numberToEnter = 3;
                                             if (residentNumber[0] != 0) {
                                                 System.out.println("Enter resident id: ");
                                                 searchId = sc.nextInt();
@@ -273,7 +285,8 @@ public class UrbanizationTreasurySystem {
                                                 for (int i = 0; i < residents.size(); i++) {
                                                     if (residents.get(i).getDni() == searchId) {
                                                         System.out.println("=========== Resident " + searchId + " ===========");
-                                                        enterAccessControl(residents.get(i));
+                                                        enterPayments(residents.get(i), numberToEnter, mounths, contadorMounths);
+                                                        contadorMounths++;
                                                         searchIdFound++;
                                                     }
                                                 }
@@ -287,6 +300,7 @@ public class UrbanizationTreasurySystem {
                                         case 2 -> {
                                             int searchId;
                                             int searchIdFound = 0;
+                                            numberToEnter = 3;
                                             if (residentNumber[0] != 0) {
                                                 System.out.println("Enter resident DNI for most the history: ");
                                                 searchId = sc.nextInt();
@@ -294,7 +308,7 @@ public class UrbanizationTreasurySystem {
                                                 for (int i = 0; i < residents.size(); i++) {
                                                     if (residents.get(i).getDni() == searchId) {
                                                         System.out.println("=========== Resident " + searchId + " ===========");
-                                                        printHistory(residents.get(i), residents.get(i).getAccessControl());
+                                                        printHistory(residents.get(i), residents.get(i).getAccessControl(), mounths, numberToEnter);
                                                         searchIdFound++;
                                                     }
                                                 }
@@ -308,6 +322,7 @@ public class UrbanizationTreasurySystem {
                                         case 3 -> {
                                             int searchId;
                                             int searchIdFound = 0;
+                                            numberToEnter = 3;
                                             if (residentNumber[0] != 0) {
                                                 System.out.println("Enter resident DNI for print bill: ");
                                                 searchId = sc.nextInt();
@@ -315,7 +330,7 @@ public class UrbanizationTreasurySystem {
                                                 for (int i = 0; i < residents.size(); i++) {
                                                     if (residents.get(i).getDni() == searchId) {
                                                         System.out.println("=========== Resident " + searchId + " ===========");
-                                                        printBill(residents.get(i), residents.get(i).getAccessControl());
+                                                        printBill(residents.get(i), residents.get(i).getAccessControl(), mounths, numberToEnter);
                                                         searchIdFound++;
                                                     }
                                                 }
@@ -365,6 +380,7 @@ public class UrbanizationTreasurySystem {
                                         case 1 -> {
                                             int searchId;
                                             int searchIdFound = 0;
+                                            numberToEnter = 4;
                                             if (residentNumber[0] != 0) {
                                                 System.out.println("Enter resident id: ");
                                                 searchId = sc.nextInt();
@@ -372,7 +388,8 @@ public class UrbanizationTreasurySystem {
                                                 for (int i = 0; i < residents.size(); i++) {
                                                     if (residents.get(i).getDni() == searchId) {
                                                         System.out.println("=========== Resident " + searchId + " ===========");
-                                                        enterExtraordinary(residents.get(i));
+                                                        enterPayments(residents.get(i), numberToEnter, mounths, contadorMounths);
+                                                        contadorMounths++;
                                                         searchIdFound++;
                                                     }
                                                 }
@@ -386,6 +403,7 @@ public class UrbanizationTreasurySystem {
                                         case 2 -> {
                                             int searchId;
                                             int searchIdFound = 0;
+                                            numberToEnter = 4;
                                             if (residentNumber[0] != 0) {
                                                 System.out.println("Enter resident DNI for most the history: ");
                                                 searchId = sc.nextInt();
@@ -393,7 +411,7 @@ public class UrbanizationTreasurySystem {
                                                 for (int i = 0; i < residents.size(); i++) {
                                                     if (residents.get(i).getDni() == searchId) {
                                                         System.out.println("=========== Resident " + searchId + " ===========");
-                                                        printHistory(residents.get(i), residents.get(i).getExtraordinary());
+                                                        printHistory(residents.get(i), residents.get(i).getExtraordinary(), mounths, numberToEnter);
                                                         searchIdFound++;
                                                     }
                                                 }
@@ -407,6 +425,7 @@ public class UrbanizationTreasurySystem {
                                         case 3 -> {
                                             int searchId;
                                             int searchIdFound = 0;
+                                            numberToEnter = 4;
                                             if (residentNumber[0] != 0) {
                                                 System.out.println("Enter resident DNI for print bill: ");
                                                 searchId = sc.nextInt();
@@ -414,7 +433,7 @@ public class UrbanizationTreasurySystem {
                                                 for (int i = 0; i < residents.size(); i++) {
                                                     if (residents.get(i).getDni() == searchId) {
                                                         System.out.println("=========== Resident " + searchId + " ===========");
-                                                        printBill(residents.get(i), residents.get(i).getExtraordinary());
+                                                        printBill(residents.get(i), residents.get(i).getExtraordinary(), mounths, numberToEnter);
                                                         searchIdFound++;
                                                     }
                                                 }
@@ -544,62 +563,59 @@ public class UrbanizationTreasurySystem {
         return (result);
     }
 
-    private static void enterAliquots(Resident residents) {
+    private static void enterPayments(Resident residents, int numberToEnter, String mounths[] , int contadorMounths) {
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the Mounth: ");
         residents.setMounths(sc.next());
-        System.out.println("Enter the payment: ");
-        residents.setAliquot(sc.nextFloat());
-
-    }
-
-    private static void enterAccessCard(Resident residents) {
-
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the Mounth: ");
-        residents.setMounths(sc.next());
-        System.out.println("Enter the payment: ");
-        residents.setAccessCard(sc.nextFloat());
-
-    }
-
-    private static void enterAccessControl(Resident residents) {
-
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the Mounth: ");
-        residents.setMounths(sc.next());
-        System.out.println("Enter the payment: ");
-        residents.setAccessControl(sc.nextFloat());
-
-    }
-    
-    private static void enterExtraordinary(Resident residents) {
-
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the Mounth: ");
-        residents.setMounths(sc.next());
-        System.out.println("Enter the paymentt: ");
-        residents.setExtraordinary(sc.nextFloat());
+        mounths[contadorMounths] = residents.getMounths();
+        
+        if(numberToEnter == 1){
+            System.out.println("Enter the aliquot payment: ");
+            residents.setAliquot(sc.nextFloat());
+        }
+        if(numberToEnter == 2){
+            System.out.println("Enter the access card payment: ");
+            residents.setAccessCard(sc.nextFloat());
+        }
+        if(numberToEnter == 3){
+            System.out.println("Enter the acces control payment: ");
+            residents.setAccessControl(sc.nextFloat());
+        }
+        if(numberToEnter == 4){
+            System.out.println("Enter the extraorddinary paymentt: ");
+            residents.setExtraordinary(sc.nextFloat());
+        }
 
     }
 
     //Los demas enters
-    private static void printHistory(Resident residents, float pay) {
+    private static void printHistory(Resident residents, float pay, String mounths[], int numberToEnter) {
         System.out.println("----------------------------------");
         System.out.println("Mounth  \t   | \t " + residents.getMounths());
         System.out.println("Payment  \t   | \t " + pay);
         System.out.println("----------------------------------");
     }
 
-    public static void printBill(Resident residents, float pay) {
+    public static void printBill(Resident residents, float pay, String mounths[], int numberToEnter) {
 
         System.out.println("----------------------------------");
         System.out.println("| National Polytechnic School Urbanization |");
         System.out.println("| Resident DNI: " + residents.getDni());
         System.out.println("| Name: " + residents.getName());
         System.out.println("| Batch Number: " + residents.getBatchNumber());
-        System.out.println("| Mounth of payment: " + residents.getMounths());
+        if(numberToEnter == 1){
+            System.out.println("| Mounth of payment: " + mounths[0]);
+        }
+        if(numberToEnter == 2){
+            System.out.println("| Mounth of payment: " + mounths[1]);
+        }
+        if(numberToEnter == 3){
+            System.out.println("| Mounth of payment: " + mounths[2]);
+        }
+        if(numberToEnter == 4){
+            System.out.println("| Mounth of payment: " + mounths[3]);
+        }
         System.out.println("| Payment: " + pay);
         System.out.println("----------------------------------");
 
