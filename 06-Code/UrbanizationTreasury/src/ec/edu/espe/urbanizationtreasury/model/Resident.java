@@ -10,7 +10,6 @@ public class Resident {
     private long dni;
     private String name;
     private int batchNumber;
-    private long setDni;
     private float aliquot;
     private float accessCard;
     private float accessControl;
@@ -19,14 +18,13 @@ public class Resident {
 
     @Override
     public String toString() {
-        return "Resident{" + "dni=" + dni + ", name=" + name + ", batchNumber=" + batchNumber + ", setDni=" + setDni + '}';
+        return "Resident{" + "dni=" + dni + ", name=" + name + ", batchNumber=" + batchNumber + ", setDni=" + '}';
     }
 
     public Resident() {
         this.dni = 0;
         this.name = "";
         this.batchNumber = 0;
-        this.setDni = 0;
         this.aliquot = 0;
         this.accessCard = 0;
         this.accessControl = 0;
@@ -56,14 +54,6 @@ public class Resident {
 
     public void setBatchNumber(int batchNumber) {
         this.batchNumber = batchNumber;
-    }
-
-    public long getSetDni() {
-        return setDni;
-    }
-
-    public void setSetDni(long setDni) {
-        this.setDni = setDni;
     }
 
     public float getAliquot() {
