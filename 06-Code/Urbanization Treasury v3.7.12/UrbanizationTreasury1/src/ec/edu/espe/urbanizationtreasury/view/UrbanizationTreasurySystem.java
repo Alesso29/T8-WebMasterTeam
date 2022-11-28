@@ -30,8 +30,10 @@ public class UrbanizationTreasurySystem {
 
         Scanner sc = new Scanner(System.in);
 
+        System.out.println("====================================================");
         System.out.println(" ---- National Polytechnic School Urbanization ---- ");
         System.out.println("              ---- Treasury System ---- ");
+        System.out.println("====================================================");
 
         while (!exit) {
 
@@ -61,10 +63,12 @@ public class UrbanizationTreasurySystem {
                             System.out.println("----------------------------------------");
                             int returnMenu = 2;
                             do {
+                                System.out.println("================================");
                                 System.out.println("1. Pay");
                                 System.out.println("2. History");
                                 System.out.println("3. Print bill");
                                 System.out.println("4. Exit");
+                                System.out.println("================================");
                                 try {
 
                                     System.out.print("Enter an option: ");
@@ -72,28 +76,36 @@ public class UrbanizationTreasurySystem {
 
                                     switch (option) {
                                         case 1 -> {
+                                            System.out.println("====================================================");
                                             numberToEnter = 1;
                                             contadorMounths = casePayments(residentNumber, residents, numberToEnter, contadorMounths);
+                                            System.out.println("====================================================");
                                         }
                                         case 2 -> {
+                                            System.out.println("====================================================");
                                             numberToEnter = 1;
                                             caseHistory(residentNumber, residents, numberToEnter);
+                                            System.out.println("====================================================");
                                         }
                                         case 3 -> {
+                                            System.out.println("====================================================");
                                             numberToEnter = 1;
                                             casePrintBill(residentNumber, residents, numberToEnter);
+                                            System.out.println("====================================================");
                                         }
                                         case 4 -> {
+                                            System.out.println("====================================================");
                                             System.out.println("Do you want go out? Yes(1) No(0)");
                                             returnMenu = sc.nextInt();
+                                            System.out.println("====================================================");
 
                                         }
                                         default ->
-                                            System.out.println("Option invalid ");
+                                            System.out.println("!Option invalid! ");
                                     }
 
                                 } catch (InputMismatchException e) {
-                                    System.out.println("Opcion invalid");
+                                    System.out.println("!Opcion invalid!");
                                     sc.next();
                                 }
                             } while (returnMenu != 1);
