@@ -132,20 +132,28 @@ public class UrbanizationTreasurySystem {
 
                                     switch (option) {
                                         case 1 -> {
+                                            System.out.println("====================================================");
                                             numberToEnter = 2;
                                             contadorMounths = casePayments(residentNumber, residents, numberToEnter, contadorMounths);
+                                            System.out.println("====================================================");
                                         }
                                         case 2 -> {
+                                            System.out.println("====================================================");
                                             numberToEnter = 2;
                                             caseHistory(residentNumber, residents, numberToEnter);
+                                            System.out.println("====================================================");
                                         }
                                         case 3 -> {
+                                            System.out.println("====================================================");
                                             numberToEnter = 2;
                                             casePrintBill(residentNumber, residents, numberToEnter);
+                                            System.out.println("====================================================");
                                         }
                                         case 4 -> {
+                                            System.out.println("====================================================");
                                             System.out.println("Do you want go out? Yes(1) No(0)");
                                             returnMenu = sc.nextInt();
+                                            System.out.println("====================================================");
 
                                         }
                                         default ->
@@ -179,20 +187,26 @@ public class UrbanizationTreasurySystem {
 
                                     switch (option) {
                                         case 1 -> {
+                                            System.out.println("====================================================");
                                             numberToEnter = 3;
                                             contadorMounths = casePayments(residentNumber, residents, numberToEnter, contadorMounths);
+                                            System.out.println("====================================================");
                                         }
                                         case 2 -> {
                                             numberToEnter = 3;
                                             caseHistory(residentNumber, residents, numberToEnter);
                                         }
                                         case 3 -> {
+                                            System.out.println("====================================================");
                                             numberToEnter = 3;
                                             casePrintBill(residentNumber, residents, numberToEnter);
+                                            System.out.println("====================================================");
                                         }
                                         case 4 -> {
+                                            System.out.println("====================================================");
                                             System.out.println("Do you want go out? Yes(1) No(0)");
                                             returnMenu = sc.nextInt();
+                                            System.out.println("====================================================");
 
                                         }
                                         default ->
@@ -227,20 +241,28 @@ public class UrbanizationTreasurySystem {
 
                                     switch (option) {
                                         case 1 -> {
+                                            System.out.println("====================================================");
                                             numberToEnter = 4;
                                             contadorMounths = casePayments(residentNumber, residents, numberToEnter, contadorMounths);
+                                            System.out.println("====================================================");
                                         }
                                         case 2 -> {
+                                            System.out.println("====================================================");
                                             numberToEnter = 4;
                                             caseHistory(residentNumber, residents, numberToEnter);
+                                            System.out.println("====================================================");
                                         }
                                         case 3 -> {
+                                            System.out.println("====================================================");
                                             numberToEnter = 4;
                                             casePrintBill(residentNumber, residents, numberToEnter);
+                                            System.out.println("====================================================");
                                         }
                                         case 4 -> {
+                                            System.out.println("====================================================");
                                             System.out.println("Do you want go out? Yes(1) No(0)");
                                             returnMenu = sc.nextInt();
+                                            System.out.println("====================================================");
 
                                         }
                                         default ->
@@ -499,12 +521,14 @@ public class UrbanizationTreasurySystem {
         String mounth;
         float payment;
         Scanner sc = new Scanner(System.in);
+        System.out.println("====================================================");
         System.out.println("Enter the Mounth: ");
         mounth = sc.next();
         mountsOfPayments.add(mounth);
         System.out.println("Enter the payment: ");
         payment = sc.nextFloat();
         payments.add(payment);
+        System.out.println("====================================================");
 
     }
 
@@ -528,14 +552,14 @@ public class UrbanizationTreasurySystem {
         int foundMounth = mounthsOfPayments.indexOf(searchPaymentMounth);
 
         if (foundMounth != -1) {
-            System.out.println("----------------------------------");
+            System.out.println("====================================================");
             System.out.println("| National Polytechnic School Urbanization |");
             System.out.println("| Resident DNI: " + residents.getDni());
             System.out.println("| Name: " + residents.getName());
             System.out.println("| Batch Number: " + residents.getBatchNumber());
             System.out.println("| Mounth of payment: " + mounthsOfPayments.get(foundMounth));
             System.out.println("| Payment: " + payments.get(foundMounth));
-            System.out.println("----------------------------------");
+            
         } else {
             System.out.println("----------------------------------");
             System.out.println("Mounth not found!!");
