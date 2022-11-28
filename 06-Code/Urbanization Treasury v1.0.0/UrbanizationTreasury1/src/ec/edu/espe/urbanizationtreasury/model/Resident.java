@@ -1,5 +1,7 @@
-
 package ec.edu.espe.urbanizationtreasury.model;
+
+import ec.edu.espe.urbanizationtreasury.model.Payment;
+import java.util.ArrayList;
 
 /**
  *
@@ -10,25 +12,17 @@ public class Resident {
     private long dni;
     private String name;
     private int batchNumber;
-    private float aliquot;
-    private float accessCard;
-    private float accessControl;
-    private float extraordinary;
+    public Payment payments = new Payment();;
     private String mounths;
-
-    @Override
-    public String toString() {
-        return "Resident{" + "dni=" + dni + ", name=" + name + ", batchNumber=" + batchNumber + ", setDni=" + '}';
-    }
+    public ArrayList<String> mounthsOfAliquot = new ArrayList<>();
+    public ArrayList<String> mounthsOfAccessCard = new ArrayList<>();
+    public ArrayList<String> mounthsOfAccessControl = new ArrayList<>();
+    public ArrayList<String> mounthsOfExtraordinary = new ArrayList<>();
 
     public Resident() {
         this.dni = 0;
         this.name = "";
         this.batchNumber = 0;
-        this.aliquot = 0;
-        this.accessCard = 0;
-        this.accessControl = 0;
-        this.extraordinary = 0;
         this.mounths = "";
     }
     
@@ -56,44 +50,44 @@ public class Resident {
         this.batchNumber = batchNumber;
     }
 
-    public float getAliquot() {
-        return aliquot;
-    }
-
-    public void setAliquot(float aliquot) {
-        this.aliquot = aliquot;
-    }
-
-    public float getAccessCard() {
-        return accessCard;
-    }
-
-    public void setAccessCard(float accessCard) {
-        this.accessCard = accessCard;
-    }
-
-    public float getAccessControl() {
-        return accessControl;
-    }
-
-    public void setAccessControl(float accessControl) {
-        this.accessControl = accessControl;
-    }
-
-    public float getExtraordinary() {
-        return extraordinary;
-    }
-
-    public void setExtraordinary(float extraordinary) {
-        this.extraordinary = extraordinary;
-    }
-
     public String getMounths() {
         return mounths;
     }
 
     public void setMounths(String mounths) {
         this.mounths = mounths;
+    }
+
+    public ArrayList<String> getMounthsOfAliquots() {
+        return mounthsOfAliquot;
+    }
+
+    public void mounthsOfAliquot(ArrayList<String> mounthsOfPayments) {
+        this.mounthsOfAliquot = mounthsOfPayments;
+    }
+
+    public ArrayList<String> getMounthsOfAccessCard() {
+        return mounthsOfAccessCard;
+    }
+
+    public void setMounthsOfAccessCard(ArrayList<String> mounthsOfAccessCard) {
+        this.mounthsOfAccessCard = mounthsOfAccessCard;
+    }
+
+    public ArrayList<String> getMounthsOfAccessControl() {
+        return mounthsOfAccessControl;
+    }
+
+    public void setMounthsOfAccessControl(ArrayList<String> mounthsOfAccessControl) {
+        this.mounthsOfAccessControl = mounthsOfAccessControl;
+    }
+
+    public ArrayList<String> getMounthsOfExtraordinary() {
+        return mounthsOfExtraordinary;
+    }
+
+    public void setMounthsOfExtraordinary(ArrayList<String> mounthsOfExtraordinary) {
+        this.mounthsOfExtraordinary = mounthsOfExtraordinary;
     }
     
 }

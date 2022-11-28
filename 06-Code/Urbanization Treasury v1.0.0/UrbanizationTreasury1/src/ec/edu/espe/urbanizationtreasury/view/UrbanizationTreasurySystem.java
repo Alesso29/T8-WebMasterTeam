@@ -1,8 +1,10 @@
 package ec.edu.espe.urbanizationtreasury.view;
 
 import ec.edu.espe.urbanizationtreasury.model.Resident;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,16 +24,14 @@ public class UrbanizationTreasurySystem {
         boolean exit = false; //Exit menu
         int residentNumber = 0; //position in the array
         int numberToEnter = 0;
-        ArrayList<String> mounthsOfPayments = new ArrayList<>();
         int contadorMounths = 0;
 
         ArrayList<Resident> residents = new ArrayList();
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||");
+
         System.out.println(" ---- National Polytechnic School Urbanization ---- ");
         System.out.println("              ---- Treasury System ---- ");
-        System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||");
 
         while (!exit) {
 
@@ -43,7 +43,8 @@ public class UrbanizationTreasurySystem {
             System.out.println("4. Access Control");
             System.out.println("5. Extraordinary");
             System.out.println("6. Archive the residents");
-            System.out.println("7. Exit");
+            System.out.println("7. Read File");
+            System.out.println("8. Exit");
             System.out.println("=================================");
             try {
                 System.out.print("Enter an option: ");
@@ -71,25 +72,18 @@ public class UrbanizationTreasurySystem {
 
                                     switch (option) {
                                         case 1 -> {
-                                            System.out.println("----------------------------------------");
                                             numberToEnter = 1;
-                                            contadorMounths = casePayments(residentNumber, residents, numberToEnter, mounthsOfPayments, contadorMounths);
-                                            System.out.println("----------------------------------------");
+                                            contadorMounths = casePayments(residentNumber, residents, numberToEnter, contadorMounths);
                                         }
                                         case 2 -> {
-                                            System.out.println("----------------------------------------");
                                             numberToEnter = 1;
-                                            caseHistory(residentNumber, residents, mounthsOfPayments, numberToEnter);
-                                            System.out.println("----------------------------------------");
+                                            caseHistory(residentNumber, residents, numberToEnter);
                                         }
                                         case 3 -> {
-                                            System.out.println("----------------------------------------");
                                             numberToEnter = 1;
-                                            casePrintBill(residentNumber, residents, mounthsOfPayments, numberToEnter);
-                                            System.out.println("----------------------------------------");
+                                            casePrintBill(residentNumber, residents, numberToEnter);
                                         }
                                         case 4 -> {
-                                            System.out.println("----------------------------------------");
                                             System.out.println("Do you want go out? Yes(1) No(0)");
                                             returnMenu = sc.nextInt();
 
@@ -107,7 +101,6 @@ public class UrbanizationTreasurySystem {
                         } else {
                             System.out.println("|||No residents registered|||");
                         }
-                        System.out.println("----------------------------------------");
 
                     }
 
@@ -127,22 +120,16 @@ public class UrbanizationTreasurySystem {
 
                                     switch (option) {
                                         case 1 -> {
-                                            System.out.println("----------------------------------------");
                                             numberToEnter = 2;
-                                            contadorMounths = casePayments(residentNumber, residents, numberToEnter, mounthsOfPayments, contadorMounths);
-                                            System.out.println("----------------------------------------");
+                                            contadorMounths = casePayments(residentNumber, residents, numberToEnter, contadorMounths);
                                         }
                                         case 2 -> {
-                                            System.out.println("----------------------------------------");
                                             numberToEnter = 2;
-                                            caseHistory(residentNumber, residents, mounthsOfPayments, numberToEnter);
-                                            System.out.println("----------------------------------------");
+                                            caseHistory(residentNumber, residents, numberToEnter);
                                         }
                                         case 3 -> {
-                                            System.out.println("----------------------------------------");
                                             numberToEnter = 2;
-                                            casePrintBill(residentNumber, residents, mounthsOfPayments, numberToEnter);
-                                            System.out.println("----------------------------------------");
+                                            casePrintBill(residentNumber, residents, numberToEnter);
                                         }
                                         case 4 -> {
                                             System.out.println("Do you want go out? Yes(1) No(0)");
@@ -180,22 +167,16 @@ public class UrbanizationTreasurySystem {
 
                                     switch (option) {
                                         case 1 -> {
-                                            System.out.println("----------------------------------------");
                                             numberToEnter = 3;
-                                            contadorMounths = casePayments(residentNumber, residents, numberToEnter, mounthsOfPayments, contadorMounths);
-                                            System.out.println("----------------------------------------");
+                                            contadorMounths = casePayments(residentNumber, residents, numberToEnter, contadorMounths);
                                         }
                                         case 2 -> {
-                                            System.out.println("----------------------------------------");
                                             numberToEnter = 3;
-                                            caseHistory(residentNumber, residents, mounthsOfPayments, numberToEnter);
-                                            System.out.println("----------------------------------------");
+                                            caseHistory(residentNumber, residents, numberToEnter);
                                         }
                                         case 3 -> {
-                                            System.out.println("----------------------------------------");
                                             numberToEnter = 3;
-                                            casePrintBill(residentNumber, residents, mounthsOfPayments, numberToEnter);
-                                            System.out.println("----------------------------------------");
+                                            casePrintBill(residentNumber, residents, numberToEnter);
                                         }
                                         case 4 -> {
                                             System.out.println("Do you want go out? Yes(1) No(0)");
@@ -234,22 +215,16 @@ public class UrbanizationTreasurySystem {
 
                                     switch (option) {
                                         case 1 -> {
-                                            System.out.println("----------------------------------------");
                                             numberToEnter = 4;
-                                            contadorMounths = casePayments(residentNumber, residents, numberToEnter, mounthsOfPayments, contadorMounths);
-                                            System.out.println("----------------------------------------");
+                                            contadorMounths = casePayments(residentNumber, residents, numberToEnter, contadorMounths);
                                         }
                                         case 2 -> {
-                                            System.out.println("----------------------------------------");
                                             numberToEnter = 4;
-                                            caseHistory(residentNumber, residents, mounthsOfPayments, numberToEnter);
-                                            System.out.println("----------------------------------------");
+                                            caseHistory(residentNumber, residents, numberToEnter);
                                         }
                                         case 3 -> {
-                                            System.out.println("----------------------------------------");
                                             numberToEnter = 4;
-                                            casePrintBill(residentNumber, residents, mounthsOfPayments, numberToEnter);
-                                            System.out.println("----------------------------------------");
+                                            casePrintBill(residentNumber, residents, numberToEnter);
                                         }
                                         case 4 -> {
                                             System.out.println("Do you want go out? Yes(1) No(0)");
@@ -271,33 +246,47 @@ public class UrbanizationTreasurySystem {
                         }
                     }
                     case 6 -> {
-                        System.out.println("----------------------------------------");
-                        int saveChickenId;
+                        int saveResident;
                         int saveIdFound = 0;
-                        if (residentNumber != 0) 
-                        {
-                            
+                        if (residentNumber != 0) {
+
                             System.out.println("What recident do you want include in the file?");
                             System.out.print("Resident DNI: ");
-                            saveChickenId = sc.nextInt();
+                            saveResident = sc.nextInt();
+                            System.out.println("What payment do you want include in the file?");
+                            System.out.print("Payment: ");
+                            System.out.println("1. Aliquot");
+                            System.out.println("2. Access Card");
+                            System.out.println("3. Access Control");
+                            System.out.println("4. Extrordinary");
+                            numberToEnter = sc.nextInt();
 
-                            for (int i = 0; i < residents.size(); i++) {
-                                if (residents.get(i).getDni() == saveChickenId) {
-                                    ArchiveListResidents(residents.get(i));
-                                    System.out.println("Resident Registered");
-                                    System.out.println("");
-                                    saveIdFound++;
-                                }
+                            while (numberToEnter < 1 || numberToEnter > 5) {
+                                System.out.println("Invalid option");
+                                System.out.println("Re-enter the option");
                             }
-                            if (saveIdFound == 0) {
-                                System.out.println("Resident DNI not found");
+
+                            if (numberToEnter > 0 && numberToEnter < 5) {
+                                for (int i = 0; i < residents.size(); i++) {
+                                    if (residents.get(i).getDni() == saveResident) {
+                                        ArchiveListResidents(residents.get(i), residentNumber);
+                                        System.out.println("Resident Registered");
+                                        System.out.println("");
+                                        saveIdFound++;
+                                    }
+                                    if (saveIdFound == 0) {
+                                        System.out.println("Resident DNI not found");
+                                    }
+                                }
                             }
                         } else {
                             System.out.println("Resident no registrated");
                         }
-                        System.out.println("----------------------------------------");
                     }
                     case 7 -> {
+                        readArchive();
+                    }
+                    case 8 -> {
                         System.out.println("=================================");
                         System.out.println("== Thanks for using the system ==");
                         System.out.println("=================================");
@@ -306,14 +295,14 @@ public class UrbanizationTreasurySystem {
                     default ->
                         System.out.println("Option invalid ");
                 }
-                } catch (InputMismatchException e) {
-                    System.out.println("You need to enter a number");
-                    sc.next();
-                }
+            } catch (InputMismatchException e) {
+                System.out.println("You need to enter a number");
+                sc.next();
+            }
         }
     }
-    
-    private static void casePrintBill(int residentNumber, ArrayList<Resident> residents, ArrayList<String> mounthsOfPayments, int numberToEnter) {
+
+    private static void casePrintBill(int residentNumber, ArrayList<Resident> residents, int numberToEnter) {
         int searchId;
         int searchIdFound = 0;
         Scanner sc = new Scanner(System.in);
@@ -325,16 +314,16 @@ public class UrbanizationTreasurySystem {
                 if (residents.get(i).getDni() == searchId) {
                     System.out.println("=========== Resident " + searchId + " ===========");
                     if (numberToEnter == 1) {
-                        printBill(residents.get(i), residents.get(i).getAliquot(), mounthsOfPayments);
+                        printBill(residents.get(i), residents.get(i).payments.aliquot, residents.get(i).mounthsOfAliquot);
                     }
                     if (numberToEnter == 2) {
-                        printBill(residents.get(i), residents.get(i).getAccessCard(), mounthsOfPayments);
+                        printBill(residents.get(i), residents.get(i).payments.accessCard, residents.get(i).mounthsOfAccessCard);
                     }
                     if (numberToEnter == 3) {
-                        printBill(residents.get(i), residents.get(i).getAccessControl(), mounthsOfPayments);
+                        printBill(residents.get(i), residents.get(i).payments.accessControl, residents.get(i).mounthsOfAccessControl);
                     }
                     if (numberToEnter == 4) {
-                        printBill(residents.get(i), residents.get(i).getExtraordinary(), mounthsOfPayments);
+                        printBill(residents.get(i), residents.get(i).payments.extraordinary, residents.get(i).mounthsOfExtraordinary);
                     }
                     searchIdFound++;
                 }
@@ -346,8 +335,8 @@ public class UrbanizationTreasurySystem {
             System.out.println("Resident no registrated");
         }
     }
-    
-    private static void caseHistory(int residentNumber, ArrayList<Resident> residents, ArrayList<String> mounthsOfPayments, int numberToEnter) {
+
+    private static void caseHistory(int residentNumber, ArrayList<Resident> residents, int numberToEnter) {
         int searchId;
         int searchIdFound = 0;
         Scanner sc = new Scanner(System.in);
@@ -359,16 +348,16 @@ public class UrbanizationTreasurySystem {
                 if (residents.get(i).getDni() == searchId) {
                     System.out.println("=========== Resident " + searchId + " ===========");
                     if (numberToEnter == 1) {
-                        printHistory(residents.get(i).getAliquot(), mounthsOfPayments);
+                        printHistory(residents.get(i).payments.aliquot, residents.get(i).mounthsOfAliquot);
                     }
                     if (numberToEnter == 2) {
-                        printHistory(residents.get(i).getAccessCard(), mounthsOfPayments);
+                        printHistory(residents.get(i).payments.accessCard, residents.get(i).mounthsOfAccessCard);
                     }
                     if (numberToEnter == 3) {
-                        printHistory(residents.get(i).getAccessControl(), mounthsOfPayments);
+                        printHistory(residents.get(i).payments.accessControl, residents.get(i).mounthsOfAccessControl);
                     }
                     if (numberToEnter == 4) {
-                        printHistory(residents.get(i).getExtraordinary(), mounthsOfPayments);
+                        printHistory(residents.get(i).payments.extraordinary, residents.get(i).mounthsOfExtraordinary);
                     }
                     searchIdFound++;
                 }
@@ -381,7 +370,7 @@ public class UrbanizationTreasurySystem {
         }
     }
 
-    private static int casePayments(int residentNumber, ArrayList<Resident> residents, int numberToEnter, ArrayList<String> mounthsOfPayments, int contadorMounths) {
+    private static int casePayments(int residentNumber, ArrayList<Resident> residents, int numberToEnter, int contadorMounths) {
         int searchId;
         int searchIdFound = 0;
         Scanner sc = new Scanner(System.in);
@@ -392,7 +381,18 @@ public class UrbanizationTreasurySystem {
             for (int i = 0; i < residents.size(); i++) {
                 if (residents.get(i).getDni() == searchId) {
                     System.out.println("=========== Resident " + searchId + " ===========");
-                    enterPayments(residents.get(i), numberToEnter, mounthsOfPayments);
+                    if (numberToEnter == 1) {
+                        enterPayments(residents.get(i).payments.aliquot, residents.get(i).mounthsOfAliquot);
+                    }
+                    if (numberToEnter == 2) {
+                        enterPayments(residents.get(i).payments.accessCard, residents.get(i).mounthsOfAccessCard);
+                    }
+                    if (numberToEnter == 3) {
+                        enterPayments(residents.get(i).payments.accessControl, residents.get(i).mounthsOfAccessControl);
+                    }
+                    if (numberToEnter == 4) {
+                        enterPayments(residents.get(i).payments.extraordinary, residents.get(i).mounthsOfExtraordinary);
+                    }
                     contadorMounths++;
                     searchIdFound++;
                 }
@@ -415,7 +415,7 @@ public class UrbanizationTreasurySystem {
         resident.setDni(sc.nextLong());
         String stringDni = String.valueOf(resident.getDni());
         reEnterDni = dniValidation(stringDni);
-        
+
         reEnterDni = noRepeatRecident(residentNumber, residents, resident, sc, reEnterDni);
 
         if (reEnterDni == 0) {
@@ -427,12 +427,12 @@ public class UrbanizationTreasurySystem {
                 reEnterDni = noRepeatRecident(residentNumber, residents, resident, sc, reEnterDni);
             }
         }
-        
-        System.out.print("Enter resident name: ");
-        resident.setName(sc.nextLine());
-        sc.nextLine();
+
         System.out.print("Enter batch number: ");
         resident.setBatchNumber(sc.nextInt());
+        sc.nextLine();
+        System.out.print("Enter resident name: ");
+        resident.setName(sc.nextLine());
         residents.add(resident);
         System.out.println("|||User entered |||");
 
@@ -482,33 +482,32 @@ public class UrbanizationTreasurySystem {
         return (result);
     }
 
-    private static void enterPayments(Resident residents, int numberToEnter, ArrayList<String> mounths) {
+    private static void enterPayments(ArrayList<Float> payments, ArrayList<String> mountsOfPayments) {
 
+        String mounth;
+        float payment;
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the Mounth: ");
-        residents.setMounths(sc.next());
-        mounths.add(residents.getMounths());
+        mounth = sc.next();
+        mountsOfPayments.add(mounth);
+        System.out.println("Enter the payment: ");
+        payment = sc.nextFloat();
+        payments.add(payment);
 
-        if (numberToEnter == 1) {
-            System.out.println("Enter the aliquot payment: ");
-            residents.setAliquot(sc.nextFloat());
-        }
-        if (numberToEnter == 2) {
-            System.out.println("Enter the access card payment: ");
-            residents.setAccessCard(sc.nextFloat());
-        }
-        if (numberToEnter == 3) {
-            System.out.println("Enter the acces control payment: ");
-            residents.setAccessControl(sc.nextFloat());
-        }
-        if (numberToEnter == 4) {
-            System.out.println("Enter the extraorddinary paymentt: ");
-            residents.setExtraordinary(sc.nextFloat());
+    }
+
+    private static void printHistory(ArrayList<Float> payments, ArrayList<String> mounthsOfPayments) {
+
+        for (int i = 0; i < mounthsOfPayments.size(); i++) {
+            System.out.println("----------------------------------");
+            System.out.println("Mounth  \t   | \t " + mounthsOfPayments.get(i));
+            System.out.println("Payment  \t   | \t " + payments.get(i));
+            System.out.println("----------------------------------");
         }
 
     }
 
-    private static void printHistory(float pay, ArrayList<String> mounthsOfPayments) {
+    public static void printBill(Resident residents, ArrayList<Float> payments, ArrayList<String> mounthsOfPayments) {
 
         String searchPaymentMounth;
         Scanner sc = new Scanner(System.in);
@@ -518,32 +517,12 @@ public class UrbanizationTreasurySystem {
 
         if (foundMounth != -1) {
             System.out.println("----------------------------------");
-            System.out.println("Mounth  \t   | \t " + mounthsOfPayments.get(foundMounth));
-            System.out.println("Payment  \t   | \t " + pay);
-            System.out.println("----------------------------------");
-        } else {
-            System.out.println("----------------------------------");
-            System.out.println("Mounth not found!!");
-            System.out.println("----------------------------------");
-        }
-    }
-
-    public static void printBill(Resident residents, float pay, ArrayList<String> mounths) {
-
-        String searchPaymentMounth;
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the Payment Mounth: ");
-        searchPaymentMounth = sc.next();
-        int foundMounth = mounths.indexOf(searchPaymentMounth);
-
-        if (foundMounth != -1) {
-            System.out.println("----------------------------------");
             System.out.println("| National Polytechnic School Urbanization |");
             System.out.println("| Resident DNI: " + residents.getDni());
             System.out.println("| Name: " + residents.getName());
             System.out.println("| Batch Number: " + residents.getBatchNumber());
-            System.out.println("| Mounth of payment: " + mounths.get(foundMounth));
-            System.out.println("| Payment: " + pay);
+            System.out.println("| Mounth of payment: " + mounthsOfPayments.get(foundMounth));
+            System.out.println("| Payment: " + payments.get(foundMounth));
             System.out.println("----------------------------------");
         } else {
             System.out.println("----------------------------------");
@@ -552,21 +531,21 @@ public class UrbanizationTreasurySystem {
         }
 
     }
-    
-    private static void ArchiveListResidents(Resident residents) {
-        
+
+    private static void ArchiveListResidents(Resident residents, int residentNumber) {
+
         File residentFile = new File("ResidentsList.csv");
-        long residentDni = residents.getDni();
-        String residentName = residents.getName();
-        float payAliquot = residents.getAliquot();
-        float payAccessCard = residents.getAccessCard();
-        float payAccessControl = residents.getAccessControl();
-        float payExtraordinary = residents.getAccessControl();
-
         try {
-
             PrintWriter writer = new PrintWriter(new FileWriter(residentFile, true));
-            writer.print(residentDni + "," + residentName + "," + payAliquot + "," + payAccessCard + "," + payAccessControl + "," + payExtraordinary);
+            for (int i = 0; i < residentNumber; i++) {
+
+                writer.print(residents.getName() + "," + residents.mounthsOfAliquot + "," + residents.payments.aliquot + ","
+                        + residents.mounthsOfAccessCard + "," + residents.payments.accessCard + ","
+                        + residents.mounthsOfAccessControl + "," + residents.payments.accessControl + ","
+                        + residents.mounthsOfExtraordinary + "," + residents.payments.extraordinary + ",");
+                writer.print("");
+
+            }
             writer.close();
 
         } catch (FileNotFoundException e) {
@@ -576,4 +555,26 @@ public class UrbanizationTreasurySystem {
         }
     }
 
+    public static void readArchive() {
+
+        File file = new File("ResidentsList.csv");
+        String[] fileData;
+        try {
+            BufferedReader input = new BufferedReader(new FileReader(file));
+            String line = input.readLine();
+            while (line != null) {
+                fileData = line.split(";");
+                for (String value : fileData) {
+                    System.out.print(value + "");
+                }
+                line = input.readLine();
+                System.out.println();
+            }
+            input.close();
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace(System.out);
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
+        }
+    }
 }

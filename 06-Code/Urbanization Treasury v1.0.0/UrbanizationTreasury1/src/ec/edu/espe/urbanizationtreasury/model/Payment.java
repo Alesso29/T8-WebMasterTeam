@@ -1,8 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package ec.edu.espe.urbanizationtreasury.model;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -10,48 +9,40 @@ package ec.edu.espe.urbanizationtreasury.model;
  */
 public class Payment {
     
-    private float aliquot;
-    private float [] accessCard = new float [12];
-    private float accessControl;
-    private float extraordinary;
-    
-    public Payment() {
-        aliquot = 0;
-        float [] array = {0,0,0,0,0,0,0,0,0,0,0,0};
-        accessCard = array;
-        accessControl = 0;
-        extraordinary = 0;
-    }
+    public ArrayList<Float> aliquot = new ArrayList<>();;
+    public ArrayList<Float> accessCard = new ArrayList<>();;
+    public ArrayList<Float> accessControl = new ArrayList<>();;
+    public ArrayList<Float> extraordinary = new ArrayList<>();;
 
-    public float getAliquot() {
+    public ArrayList<Float> getAliquot() {
         return aliquot;
     }
 
-    public void setAliquot(float aliquot) {
+    public void setAliquot(ArrayList<Float> aliquot) {
         this.aliquot = aliquot;
     }
 
-    public float[] getAccessCard() {
+    public ArrayList<Float> getAccessCard() {
         return accessCard;
     }
 
-    public void setAccessCard(float[] accessCard) {
+    public void setAccessCard(ArrayList<Float> accessCard) {
         this.accessCard = accessCard;
     }
 
-    public float getAccessControl() {
+    public ArrayList<Float> getAccessControl() {
         return accessControl;
     }
 
-    public void setAccessControl(float accessControl) {
+    public void setAccessControl(ArrayList<Float> accessControl) {
         this.accessControl = accessControl;
     }
 
-    public float getExtraordinary() {
+    public ArrayList<Float> getExtraordinary() {
         return extraordinary;
     }
 
-    public void setExtraordinary(float extraordinary) {
+    public void setExtraordinary(ArrayList<Float> extraordinary) {
         this.extraordinary = extraordinary;
     }
     
