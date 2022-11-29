@@ -1,4 +1,3 @@
-
 package ec.edu.espe.urbanizationtreasury.model;
 
 import java.util.ArrayList;
@@ -13,6 +12,10 @@ public class Payment {
     public ArrayList<Float> accessCard = new ArrayList<>();;
     public ArrayList<Float> accessControl = new ArrayList<>();;
     public ArrayList<Float> extraordinary = new ArrayList<>();;
+    public ArrayList<String> monthOfAliquot = new ArrayList<>();
+    public ArrayList<String> monthOfAccessCard = new ArrayList<>();
+    public ArrayList<String> monthOfAccessControl = new ArrayList<>();
+    public ArrayList<String> monthOfExtraordinary = new ArrayList<>();
 
     public ArrayList<Float> getAliquot() {
         return aliquot;
@@ -45,7 +48,38 @@ public class Payment {
     public void setExtraordinary(ArrayList<Float> extraordinary) {
         this.extraordinary = extraordinary;
     }
-    
+
+    public ArrayList<String> getMounthsOfAliquot() {
+        return monthOfAliquot;
+    }
+
+    public void setMounthsOfAliquot(ArrayList<String> mounthsOfAliquot) {
+        this.monthOfAliquot = mounthsOfAliquot;
+    }
+
+    public ArrayList<String> getMounthsOfAccessCard() {
+        return monthOfAccessCard;
+    }
+
+    public void setMounthsOfAccessCard(ArrayList<String> mounthsOfAccessCard) {
+        this.monthOfAccessCard = mounthsOfAccessCard;
+    }
+
+    public ArrayList<String> getMounthsOfAccessControl() {
+        return monthOfAccessControl;
+    }
+
+    public void setMounthsOfAccessControl(ArrayList<String> mounthsOfAccessControl) {
+        this.monthOfAccessControl = mounthsOfAccessControl;
+    }
+
+    public ArrayList<String> getMounthsOfExtraordinary() {
+        return monthOfExtraordinary;
+    }
+
+    public void setMounthsOfExtraordinary(ArrayList<String> mounthsOfExtraordinary) {
+        this.monthOfExtraordinary = mounthsOfExtraordinary;
+    }
     
     
 }

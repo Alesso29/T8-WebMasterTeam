@@ -1,28 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ec.edu.espe.urbanizationtreasury.model;
+
+import java.util.ArrayList;
 
 /**
  *
- * @author Augusto Salazar, WebMasterTeam, DCCO-ESPE
+ * @author WebMasterTeam, DCCO-ESPE
  */
 public class Treasury {
     
-  private long dni;
-  private String name;
+  private long dni = 1722263009;
+  private String name = "Joel Rivera";
+  private ArrayList<Resident> residents = new ArrayList();
 
-    /**
-     * @return the dni
-     */
     public long getDni() {
         return dni;
     }
 
-    /**
-     * @param dni the dni to set
-     */
     public void setDni(long dni) {
         this.dni = dni;
     }
@@ -40,6 +33,15 @@ public class Treasury {
     public void setName(String name) {
         this.name = name;
     }
-  
+
+    public ArrayList<Resident> getResidents() {
+        return residents;
+    }
+
+    public void setResidents(ArrayList<Resident> residents) {
+        this.residents = residents;
+    }
+
+    
   
 }
