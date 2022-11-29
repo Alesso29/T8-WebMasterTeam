@@ -1,6 +1,8 @@
 package ec.edu.espe.urbanizationtreasury.view;
 
+import com.google.gson.Gson;
 import ec.edu.espe.urbanizationtreasury.model.Resident;
+import ec.edu.espe.urbanizationtreasury.model.Treasury;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,6 +13,8 @@ import java.io.PrintWriter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,313 +29,312 @@ public class UrbanizationTreasurySystem {
         int residentNumber = 0; //position in the array
         int numberToEnter = 0;
         int contadorMounths = 0;
+        long treasuryDni = 0;
+        Treasury treasury = new Treasury();
+        
+        File residentFile = new File("ResidentsList.json");
 
         ArrayList<Resident> residents = new ArrayList();
 
         Scanner sc = new Scanner(System.in);
+        
+        readArchive(residentFile,residents);
+        
+        residentNumber = residents.size();
+        
+        treasury.setResidents(residents);
 
         System.out.println("====================================================");
         System.out.println(" ---- National Polytechnic School Urbanization ---- ");
         System.out.println("              ---- Treasury System ---- ");
         System.out.println("====================================================");
+        
+        System.out.println("================================");
+        System.out.println("Please enter DNI for continue: ");
+        treasuryDni = sc.nextLong();
+        System.out.println("================================");
+        
+        if(treasuryDni != treasury.getDni()){
+            while(treasuryDni != treasury.getDni()){
+                System.out.println("------------------------------");
+                System.out.println("Incorrect DNI");
+                System.out.println("Re-enter the DNI for continue:");
+                treasuryDni = sc.nextLong();
+                System.out.println("------------------------------");
+            }
+        }
 
-        while (!exit) {
+        if (treasuryDni == treasury.getDni()) {
 
-            System.out.println("================================");
-            System.out.println("#####Residents and Payments#####");
-            System.out.println("1. Enter Resident");
-            System.out.println("2. Aliquot");
-            System.out.println("3. Access Card");
-            System.out.println("4. Access Control");
-            System.out.println("5. Extraordinary");
-            System.out.println("6. Archive the residents");
-            System.out.println("7. Read File");
-            System.out.println("8. Exit");
-            System.out.println("=================================");
-            try {
-                System.out.print("Enter an option: ");
-                option = sc.nextInt();
+            System.out.println("====================================================");
+            System.out.println(" ------------ Hi, and welcome Joel to --------------");
+            System.out.println(" ---- National Polytechnic School Urbanization ---- ");
+            System.out.println("              ---- Treasury System ---- ");
+            System.out.println("====================================================");
 
-                switch (option) {
-                    case 1 -> {
-                        enterResident(residents, residentNumber); //Enter Residents
-                        residentNumber++;
-                    }
-                    case 2 -> {
 
-                        if (residentNumber != 0) {
-                            System.out.println("----------------------------------------");
-                            int returnMenu = 2;
-                            do {
-                                System.out.println("================================");
-                                System.out.println("1. Pay");
-                                System.out.println("2. History");
-                                System.out.println("3. Print bill");
-                                System.out.println("4. Exit");
-                                System.out.println("================================");
-                                try {
+            while (!exit) {
 
-                                    System.out.print("Enter an option: ");
-                                    option = sc.nextInt();
+                System.out.println("================================");
+                System.out.println("#####Residents and Payments#####");
+                System.out.println("1. Enter Resident");
+                System.out.println("2. Aliquot");
+                System.out.println("3. Access Card");
+                System.out.println("4. Access Control");
+                System.out.println("5. Extraordinary");
+                System.out.println("6. Archive the residents");
+                System.out.println("7. Exit");
+                System.out.println("=================================");
+                try {
+                    System.out.print("Enter an option: ");
+                    option = sc.nextInt();
 
-                                    switch (option) {
-                                        case 1 -> {
-                                            System.out.println("====================================================");
-                                            numberToEnter = 1;
-                                            contadorMounths = casePayments(residentNumber, residents, numberToEnter, contadorMounths);
-                                            System.out.println("====================================================");
-                                        }
-                                        case 2 -> {
-                                            System.out.println("====================================================");
-                                            numberToEnter = 1;
-                                            caseHistory(residentNumber, residents, numberToEnter);
-                                            System.out.println("====================================================");
-                                        }
-                                        case 3 -> {
-                                            System.out.println("====================================================");
-                                            numberToEnter = 1;
-                                            casePrintBill(residentNumber, residents, numberToEnter);
-                                            System.out.println("====================================================");
-                                        }
-                                        case 4 -> {
-                                            System.out.println("====================================================");
-                                            System.out.println("Do you want go out? Yes(1) No(0)");
-                                            returnMenu = sc.nextInt();
-                                            System.out.println("====================================================");
-
-                                        }
-                                        default ->
-                                            System.out.println("!Option invalid! ");
-                                    }
-
-                                } catch (InputMismatchException e) {
-                                    System.out.println("!Opcion invalid!");
-                                    sc.next();
-                                }
-                            } while (returnMenu != 1);
-                            System.out.println("----------------------------------------");
-                        } else {
-                            System.out.println("|||No residents registered|||");
+                    switch (option) {
+                        case 1 -> {
+                            enterResident(residents, residentNumber); //Enter Residents
+                            residentNumber++;
                         }
+                        case 2 -> {
 
-                    }
+                            if (residentNumber != 0) {
+                                System.out.println("----------------------------------------");
+                                int returnMenu = 2;
+                                do {
+                                    System.out.println("================================");
+                                    System.out.println("1. Pay");
+                                    System.out.println("2. History");
+                                    System.out.println("3. Print bill");
+                                    System.out.println("4. Exit");
+                                    System.out.println("================================");
+                                    try {
 
-                    case 3 -> {
-                        if (residentNumber != 0) {
-                            System.out.println("----------------------------------------");
-                            int returnMenu = 2;
-                            do {
-                                System.out.println("1. Pay");
-                                System.out.println("2. History");
-                                System.out.println("3. Print bill");
-                                System.out.println("4. Exit");
-                                try {
+                                        System.out.print("Enter an option: ");
+                                        option = sc.nextInt();
 
-                                    System.out.print("Enter an option: ");
-                                    option = sc.nextInt();
+                                        switch (option) {
+                                            case 1 -> {
+                                                System.out.println("====================================================");
+                                                numberToEnter = 1;
+                                                contadorMounths = casePayments(residentNumber, residents, numberToEnter, contadorMounths);
+                                                System.out.println("====================================================");
+                                            }
+                                            case 2 -> {
+                                                System.out.println("====================================================");
+                                                numberToEnter = 1;
+                                                caseHistory(residentNumber, residents, numberToEnter);
+                                                System.out.println("====================================================");
+                                            }
+                                            case 3 -> {
+                                                System.out.println("====================================================");
+                                                numberToEnter = 1;
+                                                casePrintBill(residentNumber, residents, numberToEnter);
+                                                System.out.println("====================================================");
+                                            }
+                                            case 4 -> {
+                                                System.out.println("====================================================");
+                                                System.out.println("Do you want go out? Yes(1) No(0)");
+                                                returnMenu = sc.nextInt();
+                                                System.out.println("====================================================");
 
-                                    switch (option) {
-                                        case 1 -> {
-                                            System.out.println("====================================================");
-                                            numberToEnter = 2;
-                                            contadorMounths = casePayments(residentNumber, residents, numberToEnter, contadorMounths);
-                                            System.out.println("====================================================");
+                                            }
+                                            default ->
+                                                System.out.println("!Option invalid! ");
                                         }
-                                        case 2 -> {
-                                            System.out.println("====================================================");
-                                            numberToEnter = 2;
-                                            caseHistory(residentNumber, residents, numberToEnter);
-                                            System.out.println("====================================================");
-                                        }
-                                        case 3 -> {
-                                            System.out.println("====================================================");
-                                            numberToEnter = 2;
-                                            casePrintBill(residentNumber, residents, numberToEnter);
-                                            System.out.println("====================================================");
-                                        }
-                                        case 4 -> {
-                                            System.out.println("====================================================");
-                                            System.out.println("Do you want go out? Yes(1) No(0)");
-                                            returnMenu = sc.nextInt();
-                                            System.out.println("====================================================");
 
-                                        }
-                                        default ->
-                                            System.out.println("Option invalid ");
+                                    } catch (InputMismatchException e) {
+                                        System.out.println("!Opcion invalid!");
+                                        sc.next();
                                     }
-
-                                } catch (InputMismatchException e) {
-                                    System.out.println("Opcion invalid");
-                                    sc.next();
-                                }
-                            } while (returnMenu != 1);
-                            System.out.println("----------------------------------------");
-                        } else {
-                            System.out.println("|||No residents registered|||");
-                        }
-                    }
-                    case 4 -> {
-
-                        if (residentNumber != 0) {
-                            System.out.println("----------------------------------------");
-                            int returnMenu = 2;
-                            do {
-                                System.out.println("1. Pay");
-                                System.out.println("2. History");
-                                System.out.println("3. Print bill");
-                                System.out.println("4. Exit");
-                                try {
-
-                                    System.out.print("Enter an option: ");
-                                    option = sc.nextInt();
-
-                                    switch (option) {
-                                        case 1 -> {
-                                            System.out.println("====================================================");
-                                            numberToEnter = 3;
-                                            contadorMounths = casePayments(residentNumber, residents, numberToEnter, contadorMounths);
-                                            System.out.println("====================================================");
-                                        }
-                                        case 2 -> {
-                                            numberToEnter = 3;
-                                            caseHistory(residentNumber, residents, numberToEnter);
-                                        }
-                                        case 3 -> {
-                                            System.out.println("====================================================");
-                                            numberToEnter = 3;
-                                            casePrintBill(residentNumber, residents, numberToEnter);
-                                            System.out.println("====================================================");
-                                        }
-                                        case 4 -> {
-                                            System.out.println("====================================================");
-                                            System.out.println("Do you want go out? Yes(1) No(0)");
-                                            returnMenu = sc.nextInt();
-                                            System.out.println("====================================================");
-
-                                        }
-                                        default ->
-                                            System.out.println("Option invalid ");
-                                    }
-
-                                } catch (InputMismatchException e) {
-                                    System.out.println("Opcion invalid");
-                                    sc.next();
-                                }
-                            } while (returnMenu != 1);
-                            System.out.println("----------------------------------------");
-                        } else {
-                            System.out.println("|||No residents registered|||");
-                        }
-
-                    }
-                    case 5 -> {
-
-                        if (residentNumber != 0) {
-                            System.out.println("----------------------------------------");
-                            int returnMenu = 2;
-                            do {
-                                System.out.println("1. Pay");
-                                System.out.println("2. History");
-                                System.out.println("3. Print bill");
-                                System.out.println("4. Exit");
-                                try {
-
-                                    System.out.print("Enter an option: ");
-                                    option = sc.nextInt();
-
-                                    switch (option) {
-                                        case 1 -> {
-                                            System.out.println("====================================================");
-                                            numberToEnter = 4;
-                                            contadorMounths = casePayments(residentNumber, residents, numberToEnter, contadorMounths);
-                                            System.out.println("====================================================");
-                                        }
-                                        case 2 -> {
-                                            System.out.println("====================================================");
-                                            numberToEnter = 4;
-                                            caseHistory(residentNumber, residents, numberToEnter);
-                                            System.out.println("====================================================");
-                                        }
-                                        case 3 -> {
-                                            System.out.println("====================================================");
-                                            numberToEnter = 4;
-                                            casePrintBill(residentNumber, residents, numberToEnter);
-                                            System.out.println("====================================================");
-                                        }
-                                        case 4 -> {
-                                            System.out.println("====================================================");
-                                            System.out.println("Do you want go out? Yes(1) No(0)");
-                                            returnMenu = sc.nextInt();
-                                            System.out.println("====================================================");
-
-                                        }
-                                        default ->
-                                            System.out.println("Option invalid ");
-                                    }
-
-                                } catch (InputMismatchException e) {
-                                    System.out.println("Opcion invalid");
-                                    sc.next();
-                                }
-                            } while (returnMenu != 1);
-                            System.out.println("----------------------------------------");
-                        } else {
-                            System.out.println("|||No residents registered|||");
-                        }
-                    }
-                    case 6 -> {
-                        int saveResident;
-                        int saveIdFound = 0;
-                        if (residentNumber != 0) {
-
-                            System.out.println("What recident do you want include in the file?");
-                            System.out.print("Resident DNI: ");
-                            saveResident = sc.nextInt();
-                            System.out.println("What payment do you want include in the file?");
-                            System.out.print("Payment: ");
-                            System.out.println("1. Aliquot");
-                            System.out.println("2. Access Card");
-                            System.out.println("3. Access Control");
-                            System.out.println("4. Extrordinary");
-                            numberToEnter = sc.nextInt();
-
-                            while (numberToEnter < 1 || numberToEnter > 5) {
-                                System.out.println("Invalid option");
-                                System.out.println("Re-enter the option");
+                                } while (returnMenu != 1);
+                                System.out.println("----------------------------------------");
+                            } else {
+                                System.out.println("|||No residents registered|||");
                             }
 
-                            if (numberToEnter > 0 && numberToEnter < 5) {
-                                for (int i = 0; i < residents.size(); i++) {
-                                    if (residents.get(i).getDni() == saveResident) {
-                                        ArchiveListResidents(residents.get(i), residentNumber);
-                                        System.out.println("Resident Registered");
-                                        System.out.println("");
-                                        saveIdFound++;
-                                    }
-                                    if (saveIdFound == 0) {
-                                        System.out.println("Resident DNI not found");
-                                    }
-                                }
-                            }
-                        } else {
-                            System.out.println("Resident no registrated");
                         }
+
+                        case 3 -> {
+                            if (residentNumber != 0) {
+                                System.out.println("----------------------------------------");
+                                int returnMenu = 2;
+                                do {
+                                    System.out.println("1. Pay");
+                                    System.out.println("2. History");
+                                    System.out.println("3. Print bill");
+                                    System.out.println("4. Exit");
+                                    try {
+
+                                        System.out.print("Enter an option: ");
+                                        option = sc.nextInt();
+
+                                        switch (option) {
+                                            case 1 -> {
+                                                System.out.println("====================================================");
+                                                numberToEnter = 2;
+                                                contadorMounths = casePayments(residentNumber, residents, numberToEnter, contadorMounths);
+                                                System.out.println("====================================================");
+                                            }
+                                            case 2 -> {
+                                                System.out.println("====================================================");
+                                                numberToEnter = 2;
+                                                caseHistory(residentNumber, residents, numberToEnter);
+                                                System.out.println("====================================================");
+                                            }
+                                            case 3 -> {
+                                                System.out.println("====================================================");
+                                                numberToEnter = 2;
+                                                casePrintBill(residentNumber, residents, numberToEnter);
+                                                System.out.println("====================================================");
+                                            }
+                                            case 4 -> {
+                                                System.out.println("====================================================");
+                                                System.out.println("Do you want go out? Yes(1) No(0)");
+                                                returnMenu = sc.nextInt();
+                                                System.out.println("====================================================");
+
+                                            }
+                                            default ->
+                                                System.out.println("Option invalid ");
+                                        }
+
+                                    } catch (InputMismatchException e) {
+                                        System.out.println("Opcion invalid");
+                                        sc.next();
+                                    }
+                                } while (returnMenu != 1);
+                                System.out.println("----------------------------------------");
+                            } else {
+                                System.out.println("|||No residents registered|||");
+                            }
+                        }
+                        case 4 -> {
+
+                            if (residentNumber != 0) {
+                                System.out.println("----------------------------------------");
+                                int returnMenu = 2;
+                                do {
+                                    System.out.println("1. Pay");
+                                    System.out.println("2. History");
+                                    System.out.println("3. Print bill");
+                                    System.out.println("4. Exit");
+                                    try {
+
+                                        System.out.print("Enter an option: ");
+                                        option = sc.nextInt();
+
+                                        switch (option) {
+                                            case 1 -> {
+                                                System.out.println("====================================================");
+                                                numberToEnter = 3;
+                                                contadorMounths = casePayments(residentNumber, residents, numberToEnter, contadorMounths);
+                                                System.out.println("====================================================");
+                                            }
+                                            case 2 -> {
+                                                numberToEnter = 3;
+                                                caseHistory(residentNumber, residents, numberToEnter);
+                                            }
+                                            case 3 -> {
+                                                System.out.println("====================================================");
+                                                numberToEnter = 3;
+                                                casePrintBill(residentNumber, residents, numberToEnter);
+                                                System.out.println("====================================================");
+                                            }
+                                            case 4 -> {
+                                                System.out.println("====================================================");
+                                                System.out.println("Do you want go out? Yes(1) No(0)");
+                                                returnMenu = sc.nextInt();
+                                                System.out.println("====================================================");
+
+                                            }
+                                            default ->
+                                                System.out.println("Option invalid ");
+                                        }
+
+                                    } catch (InputMismatchException e) {
+                                        System.out.println("Opcion invalid");
+                                        sc.next();
+                                    }
+                                } while (returnMenu != 1);
+                                System.out.println("----------------------------------------");
+                            } else {
+                                System.out.println("|||No residents registered|||");
+                            }
+
+                        }
+                        case 5 -> {
+
+                            if (residentNumber != 0) {
+                                System.out.println("----------------------------------------");
+                                int returnMenu = 2;
+                                do {
+                                    System.out.println("1. Pay");
+                                    System.out.println("2. History");
+                                    System.out.println("3. Print bill");
+                                    System.out.println("4. Exit");
+                                    try {
+
+                                        System.out.print("Enter an option: ");
+                                        option = sc.nextInt();
+
+                                        switch (option) {
+                                            case 1 -> {
+                                                System.out.println("====================================================");
+                                                numberToEnter = 4;
+                                                contadorMounths = casePayments(residentNumber, residents, numberToEnter, contadorMounths);
+                                                System.out.println("====================================================");
+                                            }
+                                            case 2 -> {
+                                                System.out.println("====================================================");
+                                                numberToEnter = 4;
+                                                caseHistory(residentNumber, residents, numberToEnter);
+                                                System.out.println("====================================================");
+                                            }
+                                            case 3 -> {
+                                                System.out.println("====================================================");
+                                                numberToEnter = 4;
+                                                casePrintBill(residentNumber, residents, numberToEnter);
+                                                System.out.println("====================================================");
+                                            }
+                                            case 4 -> {
+                                                System.out.println("====================================================");
+                                                System.out.println("Do you want go out? Yes(1) No(0)");
+                                                returnMenu = sc.nextInt();
+                                                System.out.println("====================================================");
+
+                                            }
+                                            default ->
+                                                System.out.println("Option invalid ");
+                                        }
+
+                                    } catch (InputMismatchException e) {
+                                        System.out.println("Opcion invalid");
+                                        sc.next();
+                                    }
+                                } while (returnMenu != 1);
+                                System.out.println("----------------------------------------");
+                            } else {
+                                System.out.println("|||No residents registered|||");
+                            }
+                        }
+                        case 6 -> {
+                            ArchiveListResidents(residentFile,residents);
+                            System.out.println("=================================");
+                            System.out.println("====== The file is update =======");
+                            System.out.println("=================================");
+                        }
+                        case 7 -> {
+                            System.out.println("=================================");
+                            System.out.println("== Thanks for using the system ==");
+                            System.out.println("=================================");
+                            exit = true;
+                        }
+                        default ->
+                            System.out.println("Option invalid ");
                     }
-                    case 7 -> {
-                        readArchive();
-                    }
-                    case 8 -> {
-                        System.out.println("=================================");
-                        System.out.println("== Thanks for using the system ==");
-                        System.out.println("=================================");
-                        exit = true;
-                    }
-                    default ->
-                        System.out.println("Option invalid ");
+                } catch (InputMismatchException e) {
+                    System.out.println("You need to enter a number");
+                    sc.next();
                 }
-            } catch (InputMismatchException e) {
-                System.out.println("You need to enter a number");
-                sc.next();
             }
         }
     }
@@ -348,16 +351,16 @@ public class UrbanizationTreasurySystem {
                 if (residents.get(i).getDni() == searchId) {
                     System.out.println("=========== Resident " + searchId + " ===========");
                     if (numberToEnter == 1) {
-                        printBill(residents.get(i), residents.get(i).payments.aliquot, residents.get(i).mounthsOfAliquot);
+                        printBill(residents.get(i), residents.get(i).payment.aliquot, residents.get(i).payment.monthOfAliquot);
                     }
                     if (numberToEnter == 2) {
-                        printBill(residents.get(i), residents.get(i).payments.accessCard, residents.get(i).mounthsOfAccessCard);
+                        printBill(residents.get(i), residents.get(i).payment.accessCard, residents.get(i).payment.monthOfAccessCard);
                     }
                     if (numberToEnter == 3) {
-                        printBill(residents.get(i), residents.get(i).payments.accessControl, residents.get(i).mounthsOfAccessControl);
+                        printBill(residents.get(i), residents.get(i).payment.accessControl, residents.get(i).payment.monthOfAccessControl);
                     }
                     if (numberToEnter == 4) {
-                        printBill(residents.get(i), residents.get(i).payments.extraordinary, residents.get(i).mounthsOfExtraordinary);
+                        printBill(residents.get(i), residents.get(i).payment.extraordinary, residents.get(i).payment.monthOfExtraordinary);
                     }
                     searchIdFound++;
                 }
@@ -382,16 +385,16 @@ public class UrbanizationTreasurySystem {
                 if (residents.get(i).getDni() == searchId) {
                     System.out.println("=========== Resident " + searchId + " ===========");
                     if (numberToEnter == 1) {
-                        printHistory(residents.get(i).payments.aliquot, residents.get(i).mounthsOfAliquot);
+                        printHistory(residents.get(i).payment.aliquot, residents.get(i).payment.monthOfAliquot);
                     }
                     if (numberToEnter == 2) {
-                        printHistory(residents.get(i).payments.accessCard, residents.get(i).mounthsOfAccessCard);
+                        printHistory(residents.get(i).payment.accessCard, residents.get(i).payment.monthOfAccessCard);
                     }
                     if (numberToEnter == 3) {
-                        printHistory(residents.get(i).payments.accessControl, residents.get(i).mounthsOfAccessControl);
+                        printHistory(residents.get(i).payment.accessControl, residents.get(i).payment.monthOfAccessControl);
                     }
                     if (numberToEnter == 4) {
-                        printHistory(residents.get(i).payments.extraordinary, residents.get(i).mounthsOfExtraordinary);
+                        printHistory(residents.get(i).payment.extraordinary, residents.get(i).payment.monthOfExtraordinary);
                     }
                     searchIdFound++;
                 }
@@ -416,16 +419,16 @@ public class UrbanizationTreasurySystem {
                 if (residents.get(i).getDni() == searchId) {
                     System.out.println("=========== Resident " + searchId + " ===========");
                     if (numberToEnter == 1) {
-                        enterPayments(residents.get(i).payments.aliquot, residents.get(i).mounthsOfAliquot);
+                        enterPayments(residents.get(i).payment.aliquot, residents.get(i).payment.monthOfAliquot);
                     }
                     if (numberToEnter == 2) {
-                        enterPayments(residents.get(i).payments.accessCard, residents.get(i).mounthsOfAccessCard);
+                        enterPayments(residents.get(i).payment.accessCard, residents.get(i).payment.monthOfAccessCard);
                     }
                     if (numberToEnter == 3) {
-                        enterPayments(residents.get(i).payments.accessControl, residents.get(i).mounthsOfAccessControl);
+                        enterPayments(residents.get(i).payment.accessControl, residents.get(i).payment.monthOfAccessControl);
                     }
                     if (numberToEnter == 4) {
-                        enterPayments(residents.get(i).payments.extraordinary, residents.get(i).mounthsOfExtraordinary);
+                        enterPayments(residents.get(i).payment.extraordinary, residents.get(i).payment.monthOfExtraordinary);
                     }
                     contadorMounths++;
                     searchIdFound++;
@@ -568,49 +571,63 @@ public class UrbanizationTreasurySystem {
 
     }
 
-    private static void ArchiveListResidents(Resident residents, int residentNumber) {
-
-        File residentFile = new File("ResidentsList.csv");
+    private static void ArchiveListResidents(File residentFile, ArrayList<Resident> residents) {
+        
+        Gson gson = new Gson();
+        FileWriter writer;
+        PrintWriter write;
+        residentFile.delete();
+        
         try {
-            PrintWriter writer = new PrintWriter(new FileWriter(residentFile, true));
-            for (int i = 0; i < residentNumber; i++) {
-
-                writer.print(residents.getName() + "," + residents.mounthsOfAliquot + "," + residents.payments.aliquot + ","
-                        + residents.mounthsOfAccessCard + "," + residents.payments.accessCard + ","
-                        + residents.mounthsOfAccessControl + "," + residents.payments.accessControl + ","
-                        + residents.mounthsOfExtraordinary + "," + residents.payments.extraordinary + ",");
-                writer.print("");
-
+            residentFile.createNewFile();
+        }catch(IOException ex){
+            Logger.getLogger(UrbanizationTreasurySystem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try{
+            writer = new FileWriter(residentFile, true);
+            write = new PrintWriter(writer);
+            write.println("[");
+            for (int i = 0; i < residents.size(); i++) {
+                if (i==residents.size()-1){
+                    String line = gson.toJson(residents.get(i));
+                    write.println(line);
+                }else{
+                    String line = gson.toJson(residents.get(i))+",";
+                    write.println(line);
+                }
             }
+            write.println("]");
+            write.close();
             writer.close();
-
-        } catch (FileNotFoundException e) {
+        }catch(FileNotFoundException e){
             e.printStackTrace(System.out);
-        } catch (IOException e) {
+        }catch(IOException e){
             e.printStackTrace(System.out);
         }
     }
 
-    public static void readArchive() {
-
-        File file = new File("ResidentsList.csv");
-        String[] fileData;
-        try {
-            BufferedReader input = new BufferedReader(new FileReader(file));
-            String line = input.readLine();
-            while (line != null) {
-                fileData = line.split(";");
-                for (String value : fileData) {
-                    System.out.print(value + "");
+    public static void readArchive( File residentFile, ArrayList<Resident> residents) {
+        Gson gson = new Gson();
+        residents.clear();
+        BufferedReader reader;
+        if (residentFile.exists()) {
+            try {
+                reader = new BufferedReader(new FileReader(residentFile));
+                String data = reader.readLine();
+                while(data != null){
+                    data = reader.readLine();
+                    if(data != null && !data.equals("]")){
+                        if (data.endsWith(",")){
+                            data = data.substring(0, data.length()-1);
+                        }
+                        Resident residentRead = gson.fromJson(data, Resident.class);
+                        residents.add(residentRead);
+                    }
                 }
-                line = input.readLine();
-                System.out.println();
+                reader.close();
+            }catch(IOException e){
+                e.printStackTrace(System.out);
             }
-            input.close();
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace(System.out);
-        } catch (IOException ex) {
-            ex.printStackTrace(System.out);
         }
     }
 }
