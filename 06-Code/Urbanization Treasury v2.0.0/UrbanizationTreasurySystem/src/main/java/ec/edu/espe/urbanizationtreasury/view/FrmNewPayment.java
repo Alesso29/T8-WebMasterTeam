@@ -15,6 +15,7 @@ import com.mongodb.client.model.Filters;
 import ec.edu.espe.urbanizationtreasury.controller.Controller;
 import ec.edu.espe.urbanizationtreasury.model.Payment;
 import ec.edu.espe.urbanizationtreasury.model.Resident;
+import ec.edu.espe.urbanizationtreasury.utils.IdValidationException;
 import java.util.InputMismatchException;
 import javax.swing.JOptionPane;
 import org.bson.BsonDocument;
@@ -522,17 +523,10 @@ public class FrmNewPayment extends javax.swing.JFrame {
                 Gson gson = new Gson();
                 String id = txtId.getText();
                 
-                int reEnterId = Controller.dniValidation(id);
-                resident.setId(Long.parseLong(id));
-                existResident = Controller.noRepeatRecident(database, resident, existResident);
-
-                if (reEnterId == 0) {
-                    JOptionPane.showMessageDialog(this, "Invalid Id",
-                            "Warning on input data", JOptionPane.WARNING_MESSAGE);
-                    txtId.setText("");
-
-                } else if (reEnterId == 1) {
-
+                try{
+                    Controller.validateTheId(id);
+                    resident.setId(Long.parseLong(id));
+                    existResident = Controller.noRepeatRecident(database, resident, existResident);
                     if (existResident == true) {
                         MongoCollection<Document> collection = database.getCollection("Residents");
                         Bson filter = Filters.eq("id", resident.getId());
@@ -546,10 +540,13 @@ public class FrmNewPayment extends javax.swing.JFrame {
                         int batch = residentData.getBatch();
                         cbBatch.setSelectedItem(Integer.toString(batch));
 
-                    }
-                    if (existResident == false) {
+                    }else {
                         JOptionPane.showMessageDialog(this, "Resident not found", "Warning on finding data", JOptionPane.WARNING_MESSAGE);
                     }
+                }catch(IdValidationException ive) {
+                    JOptionPane.showMessageDialog(this, "Invalid Id",
+                            "Warning on input data", JOptionPane.WARNING_MESSAGE);
+                    txtId.setText("");
                 }
 
             } catch (MongoException me) {
@@ -583,6 +580,7 @@ public class FrmNewPayment extends javax.swing.JFrame {
                 String document = "";
                 Gson gson = new Gson();
                 String id = txtId.getText();
+                
                 int reEnterId = Controller.dniValidation(id);
                 resident.setId(Long.parseLong(id));
                 existResident = Controller.noRepeatRecident(database, resident, existResident);
@@ -590,8 +588,7 @@ public class FrmNewPayment extends javax.swing.JFrame {
                 if (cbMonth.getSelectedItem().toString().equals("-Selecciona-")) {
                     JOptionPane.showMessageDialog(this, "Select a month",
                             "Warning on input data", JOptionPane.WARNING_MESSAGE);
-                }
-                if (!(cbMonth.getSelectedItem().toString().equals("-Selecciona-"))) {
+                }else {
                     payment.setMonth(cbMonth.getSelectedItem().toString());
                 }
 

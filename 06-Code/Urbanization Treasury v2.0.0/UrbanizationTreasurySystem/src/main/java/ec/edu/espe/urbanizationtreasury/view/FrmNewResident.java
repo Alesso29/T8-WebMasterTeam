@@ -8,6 +8,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import ec.edu.espe.urbanizationtreasury.controller.Controller;
 import ec.edu.espe.urbanizationtreasury.model.Resident;
+import ec.edu.espe.urbanizationtreasury.utils.IdValidationException;
 import javax.swing.JOptionPane;
 import org.bson.BsonDocument;
 import org.bson.BsonInt64;
@@ -296,11 +297,11 @@ public class FrmNewResident extends javax.swing.JFrame {
                 Bson command = new BsonDocument("ping", new BsonInt64(1));
                 Document commandResult = database.runCommand(command);
 
-                String id = txtId.getText();
-                resident.setId(Long.parseLong(id));
-                existResident = Controller.noRepeatRecident(database, resident, existResident);
-                int correctId = Controller.dniValidation(id);
-                if (correctId == 1) {
+                try {
+                    Controller.validateTheId(txtId.getText());
+                    
+                    resident.setId(Long.parseLong(txtId.getText()));
+                    existResident = Controller.noRepeatRecident(database, resident, existResident);
                     if (existResident == false) {
                         if (cbxBatchNumber.getSelectedItem().toString().equals("-Selecciona-")) {
                             JOptionPane.showMessageDialog(this, "Select the batch number",
@@ -308,11 +309,11 @@ public class FrmNewResident extends javax.swing.JFrame {
                         } else {
                             MongoCollection<Document> collection = database.getCollection("Residents");
                             Document residentAdded = new Document();
-                            long numericValueOfId;
+                            long id;
                             int batch;
-                            numericValueOfId = Long.parseLong(id);
+                            id = Long.parseLong(txtId.getText());
                             batch = Integer.parseInt(String.valueOf(cbxBatchNumber.getSelectedItem()));
-                            residentAdded.append("id", numericValueOfId)
+                            residentAdded.append("id", id)
                                     .append("name", txtName.getText())
                                     .append("batch", batch);
                             collection.insertOne(residentAdded);
@@ -324,7 +325,7 @@ public class FrmNewResident extends javax.swing.JFrame {
                     } else {
                         JOptionPane.showMessageDialog(this, "The resident with this id already exists", "Warning on adding data", JOptionPane.WARNING_MESSAGE);
                     }
-                } else {
+                } catch(IdValidationException ive) {
                     JOptionPane.showMessageDialog(this, "Invalid Id",
                             "Warning on input data", JOptionPane.WARNING_MESSAGE);
                     txtId.setText("");
@@ -358,7 +359,7 @@ public class FrmNewResident extends javax.swing.JFrame {
         // TODO add your handling code here:
         UrbanizationTreasury urbanizationTreasury;
         urbanizationTreasury = new UrbanizationTreasury();
-        this.setVisible(false);
+        this.dispose();
         urbanizationTreasury.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 
@@ -366,7 +367,7 @@ public class FrmNewResident extends javax.swing.JFrame {
         // TODO add your handling code here:
         FrmPassword frmPassword;
         frmPassword = new FrmPassword();
-        this.setVisible(false);
+        this.dispose();
         frmPassword.setVisible(true);
     }//GEN-LAST:event_itmQuitActionPerformed
 
@@ -374,7 +375,7 @@ public class FrmNewResident extends javax.swing.JFrame {
         // TODO add your handling code here:
         FrmAbout frmAbout;
         frmAbout = new FrmAbout();
-        this.setVisible(false);
+        this.dispose();
         frmAbout.setVisible(true);
     }//GEN-LAST:event_itmAboutActionPerformed
 
@@ -382,7 +383,7 @@ public class FrmNewResident extends javax.swing.JFrame {
         // TODO add your handling code here:
         FrmResidentInformation frmResidentInformation;
         frmResidentInformation = new FrmResidentInformation();
-        this.setVisible(false);
+        this.dispose();
         frmResidentInformation.setVisible(true);
     }//GEN-LAST:event_btnResidentInformationActionPerformed
 

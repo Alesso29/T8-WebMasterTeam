@@ -10,6 +10,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import ec.edu.espe.urbanizationtreasury.model.Payment;
 import ec.edu.espe.urbanizationtreasury.model.Resident;
+import ec.edu.espe.urbanizationtreasury.utils.IdValidationException;
 import ec.edu.espe.urbanizationtreasury.view.FrmResidentInformation;
 import java.awt.HeadlessException;
 import java.util.ArrayList;
@@ -127,6 +128,27 @@ public class Controller extends javax.swing.JFrame{
             result = 1;
         }
         return (result);
+    }
+    
+    public static void validateTheId(String id) throws IdValidationException {
+        int number = 0, suma = 0, resultado = 0;
+
+        for (int i = 0; i < id.length(); i++) {
+            number = Integer.parseInt(String.valueOf(id.charAt(i)));
+            if (i % 2 == 0) {
+                number = number * 2;
+                if (number > 9) {
+                    number = number - 9;
+                }
+            }
+            suma = suma + number;
+        }
+        if (suma % 10 != 0) {
+            resultado = 10 - (suma % 10);
+            if (resultado != number) {
+                throw new IdValidationException("Invalid DNI");
+            }
+        } 
     }
 
     public static void printHistory(ArrayList<Float> payments, ArrayList<String> mounthsOfPayments) {

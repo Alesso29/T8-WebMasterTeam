@@ -15,6 +15,7 @@ import com.mongodb.client.model.Filters;
 import ec.edu.espe.urbanizationtreasury.controller.Controller;
 import ec.edu.espe.urbanizationtreasury.model.Payment;
 import ec.edu.espe.urbanizationtreasury.model.Resident;
+import ec.edu.espe.urbanizationtreasury.utils.IdValidationException;
 import ec.edu.espe.urbanizationtreasury.view.FrmResidentInformation;
 import ec.edu.espe.urbanizationtreasury.view.UrbanizationTreasury;
 import javax.swing.JOptionPane;
@@ -363,17 +364,11 @@ public class FrmBenefists extends javax.swing.JFrame {
 
                 String id = txtId.getText();
                 info[0] = txtId.getText();
-                int reEnterId = Controller.dniValidation(id);
-                resident.setId(Long.parseLong(id));
-                existResident = Controller.noRepeatRecident(database, resident, existResident);
-
-                if (reEnterId == 0) {
-                    JOptionPane.showMessageDialog(this, "Invalid Id",
-                            "Warning on input data", JOptionPane.WARNING_MESSAGE);
-                    txtId.setText("");
-
-                } else if (reEnterId == 1) {
-
+                
+                try{
+                    Controller.validateTheId(id);
+                    resident.setId(Long.parseLong(id));
+                    existResident = Controller.noRepeatRecident(database, resident, existResident);
                     if (existResident == true) {
 
                         info = insertData(database, aliquot);
@@ -395,12 +390,14 @@ public class FrmBenefists extends javax.swing.JFrame {
 
                         txtId.setText("");
 
-                    }
-                    if (existResident == false) {
+                    } else {
                         JOptionPane.showMessageDialog(this, "Resident not found", "Warning on finding data", JOptionPane.WARNING_MESSAGE);
                     }
+                }catch(IdValidationException ive) {
+                    JOptionPane.showMessageDialog(this, "Invalid Id",
+                            "Warning on input data", JOptionPane.WARNING_MESSAGE);
+                    txtId.setText("");
                 }
-
             } catch (MongoException me) {
                 System.err.println("An error occurred while attempting to connect: " + me);
             }

@@ -190,7 +190,9 @@ public class UrbanizationTreasury extends javax.swing.JFrame {
 
     private void newResidentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newResidentActionPerformed
         // TODO add your handling code here:
-        
+        FrmNewResident frmNewResident = new FrmNewResident();
+        this.dispose();
+        frmNewResident.setVisible(true);
     }//GEN-LAST:event_newResidentActionPerformed
 
     /**

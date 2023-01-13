@@ -17,6 +17,7 @@ import com.mongodb.client.model.Filters;
 import ec.edu.espe.urbanizationtreasury.controller.Controller;
 import ec.edu.espe.urbanizationtreasury.model.Payment;
 import ec.edu.espe.urbanizationtreasury.model.Resident;
+import ec.edu.espe.urbanizationtreasury.utils.IdValidationException;
 
 import java.awt.HeadlessException;
 import java.util.ArrayList;
@@ -544,22 +545,14 @@ public class FrmResidentInformation extends javax.swing.JFrame {
 
     public void buttonFindResidentInformation(boolean existResident, MongoDatabase database) throws HeadlessException, NumberFormatException, JsonSyntaxException {
         String id = txtId.getText();
-        int reEnterId = Controller.dniValidation(id);
-        resident.setId(Long.parseLong(id));
-        existResident = Controller.noRepeatRecident(database, resident, existResident);
-        
         String document = "";
         Gson gson = new Gson();
         
-        if (reEnterId == 0) {
-            JOptionPane.showMessageDialog(this, "Invalid Id",
-                    "Warning on input data", JOptionPane.WARNING_MESSAGE);
-            txtId.setText("");
-            
-        } else if (reEnterId == 1) {
-            
+        try{
+            Controller.validateTheId(id);
+            resident.setId(Long.parseLong(id));
+            existResident = Controller.noRepeatRecident(database, resident, existResident);
             if (existResident == true) {
-                
                 MongoCollection<Document> collection = database.getCollection("Residents");
                 Bson filter = Filters.eq("id", resident.getId());
                 Document query = collection.find(Filters.and(filter)).first();
@@ -575,10 +568,14 @@ public class FrmResidentInformation extends javax.swing.JFrame {
                 
                 txtName.setEnabled(false);
                 cbBatch.setEnabled(false);
-            }
-            if (existResident == false) {
+            }else {
                 JOptionPane.showMessageDialog(this, "Resident not found", "Warning on finding data", JOptionPane.WARNING_MESSAGE);
             }
+               
+        }catch(IdValidationException ive) {
+            JOptionPane.showMessageDialog(this, "Invalid Id",
+                "Warning on input data", JOptionPane.WARNING_MESSAGE);
+            txtId.setText("");
         }
     }
 
