@@ -17,7 +17,7 @@ import com.mongodb.client.model.Filters;
 import ec.edu.espe.urbanizationtreasury.controller.Controller;
 import ec.edu.espe.urbanizationtreasury.model.Payment;
 import ec.edu.espe.urbanizationtreasury.model.Resident;
-import ec.edu.espe.urbanizationtreasury.utils.Exceptions;
+
 import java.awt.HeadlessException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;

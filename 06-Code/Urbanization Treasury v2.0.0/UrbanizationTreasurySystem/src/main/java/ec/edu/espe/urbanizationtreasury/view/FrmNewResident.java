@@ -8,7 +8,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import ec.edu.espe.urbanizationtreasury.controller.Controller;
 import ec.edu.espe.urbanizationtreasury.model.Resident;
-import ec.edu.espe.urbanizationtreasury.utils.IdValidationException;
 import javax.swing.JOptionPane;
 import org.bson.BsonDocument;
 import org.bson.BsonInt64;
