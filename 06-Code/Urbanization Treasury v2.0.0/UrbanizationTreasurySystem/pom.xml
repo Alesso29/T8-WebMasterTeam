@@ -9,7 +9,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>19</maven.compiler.source>
         <maven.compiler.target>19</maven.compiler.target>
-        <exec.mainClass>com.mycompany.urbanizationtreasury.UrbanizationTreasurySystem</exec.mainClass>
+        <exec.mainClass>ec.edu.espe.urbanizationtreasury.view.FrmPassword</exec.mainClass>
     </properties>
     <dependencies>
         <dependency>
