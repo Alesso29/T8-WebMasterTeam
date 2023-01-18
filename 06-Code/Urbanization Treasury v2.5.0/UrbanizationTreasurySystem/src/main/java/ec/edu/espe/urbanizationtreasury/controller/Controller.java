@@ -3,7 +3,6 @@ package ec.edu.espe.urbanizationtreasury.controller;
 //import com.google.gson.Gson;
 //import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -11,11 +10,8 @@ import com.mongodb.client.model.Filters;
 import ec.edu.espe.urbanizationtreasury.model.Payment;
 import ec.edu.espe.urbanizationtreasury.model.Resident;
 import ec.edu.espe.urbanizationtreasury.utils.IdValidationException;
-import ec.edu.espe.urbanizationtreasury.view.FrmResidentInformation;
-import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import javax.swing.JOptionPane;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
@@ -66,34 +62,6 @@ public class Controller extends javax.swing.JFrame{
         return month;
         
     }
-
-    /*public static int dniValidation(String dniValidation) {
-
-        int number = 0, suma = 0, resultado = 0, result = 0;
-
-        for (int i = 0; i < dniValidation.length(); i++) {
-            number = Integer.parseInt(String.valueOf(dniValidation.charAt(i)));
-            if (i % 2 == 0) {
-                number = number * 2;
-                if (number > 9) {
-                    number = number - 9;
-                }
-            }
-            suma = suma + number;
-        }
-        if (suma % 10 != 0) {
-            resultado = 10 - (suma % 10);
-            if (resultado == number) {
-                System.out.println("Valid DNI");
-            } else if (resultado != number) {
-                System.out.println("Invalid DNI");
-            }
-        } else {
-            System.out.println("Valid DNI");
-            result = 1;
-        }
-        return (result);
-    }*/
     
     public static void validateTheId(String id) throws IdValidationException {
         int number = 0, suma = 0, resultado = 0;

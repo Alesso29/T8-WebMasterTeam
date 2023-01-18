@@ -83,12 +83,13 @@ public class FrmResidentInformation extends javax.swing.JFrame {
         mnitNewResident = new javax.swing.JMenuItem();
         mnuitResidentInformation = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        mnuitDeleteResident = new javax.swing.JMenuItem();
         mnuPayment = new javax.swing.JMenu();
         mnuitNewPayment = new javax.swing.JMenuItem();
         mnuItDeletePayment = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         mnuitBenefist = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
         mnuitFrequentQuestions = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -358,16 +359,11 @@ public class FrmResidentInformation extends javax.swing.JFrame {
         jMenu1.add(itmAbout);
 
         jMenuItem2.setText("Quit");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
         jMenu1.add(jMenuItem2);
 
         jMenuBar1.add(jMenu1);
 
-        mnuResident.setText("Resident");
+        mnuResident.setText("Residente");
 
         mnitNewResident.setText("Nuevo Residente");
         mnitNewResident.addActionListener(new java.awt.event.ActionListener() {
@@ -393,9 +389,17 @@ public class FrmResidentInformation extends javax.swing.JFrame {
         });
         mnuResident.add(jMenuItem1);
 
+        mnuitDeleteResident.setText("Eliminar Residente");
+        mnuitDeleteResident.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuitDeleteResidentActionPerformed(evt);
+            }
+        });
+        mnuResident.add(mnuitDeleteResident);
+
         jMenuBar1.add(mnuResident);
 
-        mnuPayment.setText("Payment");
+        mnuPayment.setText("Pagos");
         mnuPayment.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 mnuPaymentItemStateChanged(evt);
@@ -432,7 +436,7 @@ public class FrmResidentInformation extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu2.setText("Help");
+        jMenu4.setText("Ayuda");
 
         mnuitFrequentQuestions.setText("Preguntas Frecuentes");
         mnuitFrequentQuestions.addActionListener(new java.awt.event.ActionListener() {
@@ -440,9 +444,9 @@ public class FrmResidentInformation extends javax.swing.JFrame {
                 mnuitFrequentQuestionsActionPerformed(evt);
             }
         });
-        jMenu2.add(mnuitFrequentQuestions);
+        jMenu4.add(mnuitFrequentQuestions);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
@@ -707,14 +711,6 @@ public class FrmResidentInformation extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backActionPerformed
 
-    private void itmAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAboutActionPerformed
-        // TODO add your handling code here:
-        FrmAbout frmAbout = new FrmAbout();
-        frmAbout.setVisible(true);
-        this.dispose();
-
-    }//GEN-LAST:event_itmAboutActionPerformed
-
     private void btmRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmRefreshActionPerformed
         // TODO add your handling code here:
         txtId.setText("");
@@ -743,12 +739,40 @@ public class FrmResidentInformation extends javax.swing.JFrame {
         enableBottom();
     }//GEN-LAST:event_txtIdKeyTyped
 
+    private void itmAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAboutActionPerformed
+        // TODO add your handling code here:
+        FrmAbout frmAbout = new FrmAbout();
+        frmAbout.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_itmAboutActionPerformed
+
     private void mnitNewResidentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnitNewResidentActionPerformed
         // TODO add your handling code here:
         FrmNewResident newResident1 = new FrmNewResident();
         newResident1.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_mnitNewResidentActionPerformed
+
+    private void mnuitResidentInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuitResidentInformationActionPerformed
+        // TODO add your handling code here:
+        FrmResidentInformation residentInfo = new FrmResidentInformation();
+        residentInfo.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_mnuitResidentInformationActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        FrmEditResident editResident = new FrmEditResident();
+        editResident.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void mnuitDeleteResidentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuitDeleteResidentActionPerformed
+        // TODO add your handling code here:
+        FrmDeleteResident editResident = new FrmDeleteResident();
+        editResident.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_mnuitDeleteResidentActionPerformed
 
     private void mnuitNewPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuitNewPaymentActionPerformed
         // TODO add your handling code here:
@@ -757,32 +781,6 @@ public class FrmResidentInformation extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_mnuitNewPaymentActionPerformed
 
-    private void mnuitBenefistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuitBenefistActionPerformed
-        // TODO add your handling code here:
-        FrmBenefists benefists = new FrmBenefists();
-        benefists.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_mnuitBenefistActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        FrmEditResident editResident = new FrmEditResident();
-        editResident.setVisible(true);
-        this.dispose();
-        
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void mnuitResidentInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuitResidentInformationActionPerformed
-        // TODO add your handling code here:
-        FrmResidentInformation residentInfo1 = new FrmResidentInformation();
-        residentInfo1.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_mnuitResidentInformationActionPerformed
-
-    private void mnuPaymentItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_mnuPaymentItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnuPaymentItemStateChanged
-
     private void mnuItDeletePaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItDeletePaymentActionPerformed
         // TODO add your handling code here:
         FrmDeletePayment editPayment = new FrmDeletePayment();
@@ -790,21 +788,22 @@ public class FrmResidentInformation extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_mnuItDeletePaymentActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void mnuPaymentItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_mnuPaymentItemStateChanged
         // TODO add your handling code here:
-        FrmPassword frmPassword;
-        frmPassword = new FrmPassword();
-        this.setVisible(false);
-        frmPassword.setVisible(true);
-        
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_mnuPaymentItemStateChanged
+
+    private void mnuitBenefistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuitBenefistActionPerformed
+        // TODO add your handling code here:
+        FrmBenefists benefists = new FrmBenefists();
+        benefists.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_mnuitBenefistActionPerformed
 
     private void mnuitFrequentQuestionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuitFrequentQuestionsActionPerformed
         // TODO add your handling code here:
         FrmFrequentQuestions frecuentQuestions = new FrmFrequentQuestions();
         frecuentQuestions.setVisible(true);
         this.dispose();
-        
     }//GEN-LAST:event_mnuitFrequentQuestionsActionPerformed
 
     /**
@@ -870,8 +869,8 @@ public class FrmResidentInformation extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -886,6 +885,7 @@ public class FrmResidentInformation extends javax.swing.JFrame {
     private javax.swing.JMenu mnuPayment;
     private javax.swing.JMenu mnuResident;
     private javax.swing.JMenuItem mnuitBenefist;
+    private javax.swing.JMenuItem mnuitDeleteResident;
     private javax.swing.JMenuItem mnuitFrequentQuestions;
     private javax.swing.JMenuItem mnuitNewPayment;
     private javax.swing.JMenuItem mnuitResidentInformation;
