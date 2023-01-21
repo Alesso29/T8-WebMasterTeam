@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 package ec.edu.espe.urbanizationtreasury.view;
 
 import com.google.gson.Gson;
@@ -11,7 +15,8 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import ec.edu.espe.urbanizationtreasury.controller.Controller;
-import ec.edu.espe.urbanizationtreasury.model.*;
+import ec.edu.espe.urbanizationtreasury.model.Payment;
+import ec.edu.espe.urbanizationtreasury.model.Resident;
 import ec.edu.espe.urbanizationtreasury.utils.IdValidationException;
 import java.awt.HeadlessException;
 import java.util.ArrayList;
@@ -32,7 +37,10 @@ public class FrmResidentInformation extends javax.swing.JFrame {
      * Creates new form FrmResidentInformation
      */
     DefaultTableModel model = new DefaultTableModel();
+    private static final Payment payment = new Payment();
     private static final Resident resident = new Resident();
+    private static final FrmResidentInformation residentInfo = new FrmResidentInformation();
+    private static final Controller controller = new Controller();
 
     public FrmResidentInformation() {
         initComponents();
@@ -56,7 +64,9 @@ public class FrmResidentInformation extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        cbBatch = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
+        txtName = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         aliquot = new javax.swing.JRadioButton();
@@ -73,8 +83,6 @@ public class FrmResidentInformation extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         back = new javax.swing.JButton();
         btmRefresh = new javax.swing.JButton();
-        jlBatch = new javax.swing.JLabel();
-        jlName = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         itmAbout = new javax.swing.JMenuItem();
@@ -82,15 +90,11 @@ public class FrmResidentInformation extends javax.swing.JFrame {
         mnuResident = new javax.swing.JMenu();
         mnitNewResident = new javax.swing.JMenuItem();
         mnuitResidentInformation = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        mnuitDeleteResident = new javax.swing.JMenuItem();
         mnuPayment = new javax.swing.JMenu();
         mnuitNewPayment = new javax.swing.JMenuItem();
-        mnuItDeletePayment = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         mnuitBenefist = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        mnuitFrequentQuestions = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,8 +132,30 @@ public class FrmResidentInformation extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("Batch Number:");
 
+        cbBatch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbBatchActionPerformed(evt);
+            }
+        });
+        cbBatch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cbBatchKeyTyped(evt);
+            }
+        });
+
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setText("Name:");
+
+        txtName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameActionPerformed(evt);
+            }
+        });
+        txtName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNameKeyTyped(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel9.setText("Payment type:");
@@ -261,10 +287,6 @@ public class FrmResidentInformation extends javax.swing.JFrame {
             }
         });
 
-        jlBatch.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        jlName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -278,12 +300,13 @@ public class FrmResidentInformation extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtId, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                                .addComponent(txtName))
                             .addComponent(jLabel5)
                             .addComponent(jLabel7)
                             .addComponent(jLabel6)
-                            .addComponent(jlBatch)
-                            .addComponent(jlName))
+                            .addComponent(cbBatch, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -308,7 +331,7 @@ public class FrmResidentInformation extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel4)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(jLabel6)
@@ -316,26 +339,23 @@ public class FrmResidentInformation extends javax.swing.JFrame {
                         .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlBatch)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbBatch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addComponent(btmFind)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btmSearch)
-                            .addComponent(btmRefresh)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(jlName)))
+                            .addComponent(btmRefresh))))
                 .addGap(31, 31, 31)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -363,9 +383,9 @@ public class FrmResidentInformation extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        mnuResident.setText("Residente");
+        mnuResident.setText("Resident");
 
-        mnitNewResident.setText("Nuevo Residente");
+        mnitNewResident.setText("New Resident");
         mnitNewResident.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnitNewResidentActionPerformed(evt);
@@ -373,54 +393,20 @@ public class FrmResidentInformation extends javax.swing.JFrame {
         });
         mnuResident.add(mnitNewResident);
 
-        mnuitResidentInformation.setText("Informacion del Residente");
-        mnuitResidentInformation.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuitResidentInformationActionPerformed(evt);
-            }
-        });
+        mnuitResidentInformation.setText("Resident Information");
         mnuResident.add(mnuitResidentInformation);
-
-        jMenuItem1.setText("Editar Residente");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        mnuResident.add(jMenuItem1);
-
-        mnuitDeleteResident.setText("Eliminar Residente");
-        mnuitDeleteResident.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuitDeleteResidentActionPerformed(evt);
-            }
-        });
-        mnuResident.add(mnuitDeleteResident);
 
         jMenuBar1.add(mnuResident);
 
-        mnuPayment.setText("Pagos");
-        mnuPayment.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                mnuPaymentItemStateChanged(evt);
-            }
-        });
+        mnuPayment.setText("Payment");
 
-        mnuitNewPayment.setText("Nuevo Pago");
+        mnuitNewPayment.setText("New Payment");
         mnuitNewPayment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuitNewPaymentActionPerformed(evt);
             }
         });
         mnuPayment.add(mnuitNewPayment);
-
-        mnuItDeletePayment.setText("Eliminar Pago");
-        mnuItDeletePayment.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuItDeletePaymentActionPerformed(evt);
-            }
-        });
-        mnuPayment.add(mnuItDeletePayment);
 
         jMenuBar1.add(mnuPayment);
 
@@ -436,17 +422,8 @@ public class FrmResidentInformation extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setText("Ayuda");
-
-        mnuitFrequentQuestions.setText("Preguntas Frecuentes");
-        mnuitFrequentQuestions.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuitFrequentQuestionsActionPerformed(evt);
-            }
-        });
-        jMenu4.add(mnuitFrequentQuestions);
-
-        jMenuBar1.add(jMenu4);
+        jMenu2.setText("Help");
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -479,6 +456,11 @@ public class FrmResidentInformation extends javax.swing.JFrame {
         model.addColumn("Month");
         this.table.setModel(model);
 
+        cbBatch.addItem("-Selecciona-");
+        for (int i = 1; i <= 100; i++) {
+            String number = String.valueOf(i);
+            cbBatch.addItem(number);
+        }
     }
 
     public void enableBottom2() {
@@ -490,7 +472,7 @@ public class FrmResidentInformation extends javax.swing.JFrame {
     }
 
     public void enableBottom() {
-        if (!jlName.getText().isEmpty() && !jlBatch.getText().equals("")
+        if (!txtName.getText().isEmpty() && !cbBatch.getSelectedItem().toString().equals("-Selecciona-")
                 && !txtId.getText().isEmpty()) {
             btmSearch.setEnabled(true);
         } else {
@@ -543,11 +525,13 @@ public class FrmResidentInformation extends javax.swing.JFrame {
                 };
                 Resident residentData = gson.fromJson(document, type.getType());
 
-                jlName.setText(residentData.getName());
+                txtName.setText(residentData.getName());
                 int batch = residentData.getBatch();
-                jlBatch.setText(Integer.toString(batch));
+                cbBatch.setSelectedItem(Integer.toString(batch));
                 model.getDataVector().removeAllElements();
 
+                txtName.setEnabled(false);
+                cbBatch.setEnabled(false);
             }
             if (existResident == false) {
                 JOptionPane.showMessageDialog(this, "Resident not found", "Warning on finding data", JOptionPane.WARNING_MESSAGE);
@@ -565,6 +549,16 @@ public class FrmResidentInformation extends javax.swing.JFrame {
         // TODO add your handling code here:
         enableBottom();
     }//GEN-LAST:event_txtIdActionPerformed
+
+    private void cbBatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBatchActionPerformed
+        enableBottom();
+    }//GEN-LAST:event_cbBatchActionPerformed
+
+    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
+        // TODO add your handling code here:
+        enableBottom();
+
+    }//GEN-LAST:event_txtNameActionPerformed
 
     private void aliquotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aliquotActionPerformed
         // TODO add your handling code here:
@@ -616,12 +610,12 @@ public class FrmResidentInformation extends javax.swing.JFrame {
         ArrayList<String> documentWithPayments = new ArrayList<>();
         Gson gson = new Gson();
 
-        if (jlBatch.getText().equals("")) {
+        if (cbBatch.getSelectedItem().toString().equals("-Selecciona-")) {
             JOptionPane.showMessageDialog(this, "Select the batch number",
                     "Warning on input data", JOptionPane.WARNING_MESSAGE);
         }
-        if (!(jlBatch.getText().equals(""))) {
-            resident.setBatch(Integer.parseInt(jlBatch.getText()));
+        if (!(cbBatch.getSelectedItem().toString().equals("-Selecciona-"))) {
+            resident.setBatch(Integer.parseInt(cbBatch.getSelectedItem().toString()));
         }
 
         if (aliquot.isSelected()) {
@@ -663,12 +657,12 @@ public class FrmResidentInformation extends javax.swing.JFrame {
 
                     int batch = residentData.getBatch();
 
-                    if (!jlBatch.getText().equals(Integer.toString(batch)) && !jlName.getText().equals(residentData.getName())) {
+                    if (!cbBatch.getSelectedItem().toString().equals(Integer.toString(batch)) && !txtName.getText().equals(residentData.getName())) {
                         JOptionPane.showMessageDialog(this, "The batch number or name entered is incorrect",
                                 "Warning on input data", JOptionPane.WARNING_MESSAGE);
                     }
-                    if (jlBatch.getText().equals(Integer.toString(batch))
-                            && jlName.getText().equals(residentData.getName())) {
+                    if (cbBatch.getSelectedItem().toString().equals(Integer.toString(batch))
+                            && txtName.getText().equals(residentData.getName())) {
 
                         while (cursor2.hasNext()) {
                             documentWithPayments.add(cursor2.next().toJson());
@@ -678,10 +672,10 @@ public class FrmResidentInformation extends javax.swing.JFrame {
                             System.out.println("" + documentWithPayments.get(j));
                             Payment paymentData = gson.fromJson(documentWithPayments.get(j), type2.getType());
 
-                            jlBatch.setText(Integer.toString(batch));
-                            jlName.setText(residentData.getName());
-                            info[2] = jlBatch.getText();
-                            info[1] = jlName.getText();
+                            cbBatch.setSelectedItem(Integer.toString(batch));
+                            txtName.setText(residentData.getName());
+                            info[2] = cbBatch.getSelectedItem().toString();
+                            info[1] = txtName.getText();
                             info[3] = Float.toString(paymentData.getPayment());
                             info[4] = paymentData.getMonth();
 
@@ -711,12 +705,22 @@ public class FrmResidentInformation extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backActionPerformed
 
+    private void itmAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAboutActionPerformed
+        // TODO add your handling code here:
+        FrmAbout frmAbout = new FrmAbout();
+        frmAbout.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_itmAboutActionPerformed
+
     private void btmRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmRefreshActionPerformed
         // TODO add your handling code here:
         txtId.setText("");
-        jlBatch.setText("");
-        jlName.setText("");
+        cbBatch.setSelectedItem("-Selecciona-");
+        txtName.setText("");
         model.getDataVector().removeAllElements();
+        txtName.setEnabled(true);
+        cbBatch.setEnabled(true);
 
     }//GEN-LAST:event_btmRefreshActionPerformed
 
@@ -739,12 +743,33 @@ public class FrmResidentInformation extends javax.swing.JFrame {
         enableBottom();
     }//GEN-LAST:event_txtIdKeyTyped
 
-    private void itmAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAboutActionPerformed
+    private void txtNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyTyped
         // TODO add your handling code here:
-        FrmAbout frmAbout = new FrmAbout();
-        frmAbout.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_itmAboutActionPerformed
+        char c = evt.getKeyChar();
+
+        if ((Character.isLetter(c)) || (Character.isWhitespace(c)) || (Character.isISOControl(c))) {
+            txtName.setEditable(true);
+        } else {
+            txtName.setEditable(false);
+            JOptionPane.showMessageDialog(this, c + " is not accepted here", "Warning on input data", JOptionPane.WARNING_MESSAGE);
+        }
+        enableBottom();
+
+    }//GEN-LAST:event_txtNameKeyTyped
+
+    private void cbBatchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbBatchKeyTyped
+        // TODO add your handling code here:
+
+        char d = evt.getKeyChar();
+
+        if ((Character.isDigit(d)) || (Character.isISOControl(d))) {
+            txtId.setEditable(true);
+        } else {
+            txtId.setEditable(false);
+            JOptionPane.showMessageDialog(this, d + " is not accepted here", "Warning on input data", JOptionPane.WARNING_MESSAGE);
+        }
+        enableBottom();
+    }//GEN-LAST:event_cbBatchKeyTyped
 
     private void mnitNewResidentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnitNewResidentActionPerformed
         // TODO add your handling code here:
@@ -753,27 +778,6 @@ public class FrmResidentInformation extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_mnitNewResidentActionPerformed
 
-    private void mnuitResidentInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuitResidentInformationActionPerformed
-        // TODO add your handling code here:
-        FrmResidentInformation residentInfo = new FrmResidentInformation();
-        residentInfo.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_mnuitResidentInformationActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        FrmEditResident editResident = new FrmEditResident();
-        editResident.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void mnuitDeleteResidentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuitDeleteResidentActionPerformed
-        // TODO add your handling code here:
-        FrmDeleteResident editResident = new FrmDeleteResident();
-        editResident.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_mnuitDeleteResidentActionPerformed
-
     private void mnuitNewPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuitNewPaymentActionPerformed
         // TODO add your handling code here:
         FrmNewPayment newPay = new FrmNewPayment();
@@ -781,30 +785,12 @@ public class FrmResidentInformation extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_mnuitNewPaymentActionPerformed
 
-    private void mnuItDeletePaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItDeletePaymentActionPerformed
-        // TODO add your handling code here:
-        FrmDeletePayment editPayment = new FrmDeletePayment();
-        editPayment.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_mnuItDeletePaymentActionPerformed
-
-    private void mnuPaymentItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_mnuPaymentItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnuPaymentItemStateChanged
-
     private void mnuitBenefistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuitBenefistActionPerformed
         // TODO add your handling code here:
         FrmBenefists benefists = new FrmBenefists();
         benefists.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_mnuitBenefistActionPerformed
-
-    private void mnuitFrequentQuestionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuitFrequentQuestionsActionPerformed
-        // TODO add your handling code here:
-        FrmFrequentQuestions frecuentQuestions = new FrmFrequentQuestions();
-        frecuentQuestions.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_mnuitFrequentQuestionsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -835,10 +821,6 @@ public class FrmResidentInformation extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -857,6 +839,7 @@ public class FrmResidentInformation extends javax.swing.JFrame {
     private javax.swing.JButton btmFind;
     private javax.swing.JButton btmRefresh;
     private javax.swing.JButton btmSearch;
+    private javax.swing.JComboBox<String> cbBatch;
     private javax.swing.JRadioButton extraordinary;
     private javax.swing.JMenuItem itmAbout;
     private javax.swing.JButton jButton5;
@@ -869,27 +852,22 @@ public class FrmResidentInformation extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel jlBatch;
-    private javax.swing.JLabel jlName;
     private javax.swing.JMenuItem mnitNewResident;
-    private javax.swing.JMenuItem mnuItDeletePayment;
     private javax.swing.JMenu mnuPayment;
     private javax.swing.JMenu mnuResident;
     private javax.swing.JMenuItem mnuitBenefist;
-    private javax.swing.JMenuItem mnuitDeleteResident;
-    private javax.swing.JMenuItem mnuitFrequentQuestions;
     private javax.swing.JMenuItem mnuitNewPayment;
     private javax.swing.JMenuItem mnuitResidentInformation;
     private javax.swing.JTable table;
     private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 }
