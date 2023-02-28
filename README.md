@@ -3,7 +3,7 @@ Team 8
 
 Members:
 
--Rivera Joe
+-Rivera Joel
 -Salazar Augusto
 -Suárez Matías
 -Martín Suquillo
