@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: ec.edu.espe.urbanizationtreasury.controller.ControllerTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.134 s <<< FAILURE! - in ec.edu.espe.urbanizationtreasury.controller.ControllerTest
+testNoRepeatRecident  Time elapsed: 0.082 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "com.mongodb.client.MongoDatabase.getCollection(String)" because "database" is null
+	at ec.edu.espe.urbanizationtreasury.controller.ControllerTest.testNoRepeatRecident(ControllerTest.java:28)
+
+testReadMongo  Time elapsed: 0.036 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "com.mongodb.client.MongoDatabase.getCollection(String)" because "database" is null
+	at ec.edu.espe.urbanizationtreasury.controller.ControllerTest.testReadMongo(ControllerTest.java:42)
+
+testEnterPayments  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "ec.edu.espe.urbanizationtreasury.model.Payment.getPaymentType()" because "paymentTypeSelect" is null
+	at ec.edu.espe.urbanizationtreasury.controller.ControllerTest.testEnterPayments(ControllerTest.java:65)
+
