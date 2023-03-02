@@ -1,0 +1,20 @@
+-------------------------------------------------------------------------------
+Test set: ec.edu.espe.urbanizationtreasury.controller.PaymentControllerTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 4, Skipped: 0, Time elapsed: 4.214 s <<< FAILURE! - in ec.edu.espe.urbanizationtreasury.controller.PaymentControllerTest
+testUpdatePaymentToDelete  Time elapsed: 0.464 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "javax.swing.table.DefaultTableModel.getDataVector()" because "model" is null
+	at ec.edu.espe.urbanizationtreasury.controller.PaymentControllerTest.testUpdatePaymentToDelete(PaymentControllerTest.java:56)
+
+testAddNewPayment  Time elapsed: 0.037 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "javax.swing.JTextField.getText()" because "txtId" is null
+	at ec.edu.espe.urbanizationtreasury.controller.PaymentControllerTest.testAddNewPayment(PaymentControllerTest.java:99)
+
+testSearchPaymentToDelete  Time elapsed: 0.019 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "javax.swing.JTextField.getText()" because "txtId" is null
+	at ec.edu.espe.urbanizationtreasury.controller.PaymentControllerTest.testSearchPaymentToDelete(PaymentControllerTest.java:36)
+
+testSelectPaymentType  Time elapsed: 0.021 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "javax.swing.ButtonGroup.add(javax.swing.AbstractButton)" because "bgPaymentType" is null
+	at ec.edu.espe.urbanizationtreasury.controller.PaymentControllerTest.testSelectPaymentType(PaymentControllerTest.java:74)
+

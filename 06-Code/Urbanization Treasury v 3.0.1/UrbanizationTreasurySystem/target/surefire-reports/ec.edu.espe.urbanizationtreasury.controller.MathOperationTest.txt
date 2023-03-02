@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: ec.edu.espe.urbanizationtreasury.controller.MathOperationTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.042 s <<< FAILURE! - in ec.edu.espe.urbanizationtreasury.controller.MathOperationTest
+testCalculateAmount  Time elapsed: 0.028 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "javax.swing.JComboBox.getSelectedItem()" because "cbMounthNumber" is null
+	at ec.edu.espe.urbanizationtreasury.controller.MathOperationTest.testCalculateAmount(MathOperationTest.java:26)
+
